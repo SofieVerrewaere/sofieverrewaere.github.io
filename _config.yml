@@ -1,13 +1,13 @@
 # Site settings
-title: Tom Van de Wiele
+title: Sofie Verrewaere
 header-img: img/home-bg.jpg
-email: tvdwiele@gmail.com
+email: sofieverrewaere@gmail.com
 description: "Blog of Tom Van de Wiele. Read about my projects."
 baseurl: ""
-url: "https://ttvand.github.io"
-facebook_username: tvdewiele
-github_username: ttvand
-linkedin_username: tom-van-de-wiele-a411a8136
+url: "https://sofieverrewaere.github.io"
+facebook_username: sofie.ver.1
+github_username: SofieVerrewaere
+linkedin_username: sofieverrewaere
 
 # Build settings
 markdown: kramdown
