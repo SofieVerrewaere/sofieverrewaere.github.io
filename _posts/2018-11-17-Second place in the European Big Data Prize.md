@@ -26,7 +26,6 @@ This blog post will cover all sections to go from the raw data to the final subm
 * *[Ensembling](#Ensembling)*
 * *[Conclusion](#conclusion)*
 
-The R source code is available on <a href="https://github.com/ttvand/Santander-Product-Recommendation/" target="_blank">GitHub</a>. This <a href="https://www.kaggle.com/c/santander-product-recommendation/forums/t/26824/2nd-place-solution" target="_blank">thread</a> on the Kaggle forum discusses the solution on a higher level and is a good place to start if you participated in the challenge.
 
 ## <a name="introduction"><a> Introduction
 **From the competition page**: Ready to make a downpayment on your first house? Or looking to leverage the equity in the home you have? To support needs for a range of financial decisions, Santander Bank offers a lending hand to their customers through personalized product recommendations.
