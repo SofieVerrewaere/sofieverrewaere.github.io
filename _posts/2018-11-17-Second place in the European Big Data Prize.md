@@ -23,7 +23,7 @@ This blog post will cover all sections to go from the raw data to the final subm
    * *[Base model combination](##baseModelComb)*
    * *[Post-processing](##postProcessing)*
    * *[Conclusion](##conclusion)*
-* *[Questions](#questions)*
+* *[Closing Remarks](#closingRemarks)*
 
 ## <a name="introduction"><a> Introduction
 
@@ -35,6 +35,8 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 
 ## <a name="modelApproach"><a> Model Approach
+### what difficulties did you encounter?
+
 
 ### <a name="explorAnalysis"><a> Exploratory analysis
 
@@ -55,9 +57,8 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 ### <a name="conclusion"><a> Conclusion
 
-## <a name="questions"><a> Questions
+## <a name="closingRemarks"><a> Closing Remarks
 
-#### How did you tackle the challenge and what difficulties did you encounter?
 
 #### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
 
