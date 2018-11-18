@@ -31,7 +31,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 Access to information in a timely way could have a positive impact on the way we consume energy, the way we organise our transport systems and even the way we run our health and other public services. Predicting consumption patterns must be accurate, and need to be delivered in real-time which will allow for effective action such as the use of energy resources in an optimal fashion. Faster, more accurate and resource-efficient prediction methods will result in more efficient management of sectors of the economy. Indeed today, these predictions are not always accurate and lead to the wasteful consumption of energy resources.
 
-The European Commission has launched the Big Data Technologies Horizon Prize to address this issue. The goal is to develop new spatiotemporal forecasting method which are able to beat ones currently available.
+The European Commission has launched the Big Data Technologies Horizon Prize to address this issue. The goal is to develop a new spatiotemporal forecasting method which are able to beat ones currently available.
 
 
 ## <a name="modelApproach"><a> Model Approach
