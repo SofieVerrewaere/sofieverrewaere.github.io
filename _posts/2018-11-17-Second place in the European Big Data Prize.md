@@ -17,12 +17,12 @@ This blog post will cover all sections to go from the raw data to the final subm
 * *[Introduction](#introduction)*
 * *[Model Approach](#modelApproach)*
    * *[Exploratory analysis](##explorAnalysis)*
-* *[Strategy](##strategy)*
-* *[Feature engineering](##featEng)*
-* *[Base models](##baseModels)*
-* *[Base model combination](##baseModelComb)*
-* *[Post-processing](##postProcessing)*
-* *[Conclusion](##conclusion)*
+   * *[Strategy](##strategy)*
+   * *[Feature engineering](##featEng)*
+   * *[Base models](##baseModels)*
+   * *[Base model combination](##baseModelComb)*
+   * *[Post-processing](##postProcessing)*
+   * *[Conclusion](##conclusion)*
 * *[Questions](#questions)*
 
 ## <a name="introduction"><a> Introduction
