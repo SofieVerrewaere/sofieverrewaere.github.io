@@ -4,7 +4,7 @@ title: "European Commission Horizon 2020 prize on Big data Technologies"
 subtitle:   "Second place and €400K award!"
 date:       2018-11-17 00:00:00
 author:     "Sofie Verrewaere"
-header-img: "img/EC/powerlines.jpg"
+header-img: "img/EC/powerlines_rotate.jpg"
 comments: true
 ---
 
