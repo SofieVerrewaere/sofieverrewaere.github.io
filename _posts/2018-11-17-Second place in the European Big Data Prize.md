@@ -15,8 +15,8 @@ comments: true
 This blog post will cover all sections to go from the raw data to the final submission. Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
 
 * *[Introduction](#introduction)*
-* ****[Model Approach](#modelApproach)*
-* *[Exploratory analysis](##explorAnalysis)*
+* *[Model Approach](#modelApproach)*
+*[Exploratory analysis](##explorAnalysis)*
 * *[Strategy](##strategy)*
 * *[Feature engineering](##featEng)*
 * *[Base models](##baseModels)*
