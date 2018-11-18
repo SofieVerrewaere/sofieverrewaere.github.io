@@ -51,6 +51,14 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 ## <a name="questions"><a> Questions
 
+#### How did you tackle the challenge and what difficulties did you encounter?
+
+#### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
+
+#### In which otther fields would you see applications for similar prediction challenge and solutions?
+
+#### What would you recommend to young data scientist or students whou want to be succesful?
+
 I look forward to your comments and suggestions.
 
 
