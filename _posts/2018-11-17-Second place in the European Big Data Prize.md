@@ -38,6 +38,13 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 
 ### <a name="preProcessing"><a> Pre-processing
+The most important steps of the data preprocessing approach are discussed below.
+
+The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
++Short outlier bursts (1 to 10 data points)
++Zero values (ranging from 1 data point to long sequences of missing (?) data)
++Interpolated values
+
 
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
