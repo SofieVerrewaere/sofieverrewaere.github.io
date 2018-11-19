@@ -16,7 +16,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 * *[Introduction](#introduction)*
 * *[Model Approach](#modelApproach)*
-   * *[Exploratory analysis](##explorAnalysis)*
+   * *[Pre-Processing](##preProcessing)*
    * *[Strategy](##strategy)*
    * *[Feature engineering](##featEng)*
    * *[Base models](##baseModels)*
@@ -35,13 +35,29 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 
 ## <a name="modelApproach"><a> Model Approach
-### what difficulties did you encounter?
 
 
-### <a name="explorAnalysis"><a> Exploratory analysis
+### <a name="preProcessing"><a> Pre-processing
+
+#### Handling interpolated values
+The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
+
+#### Handling zero values
+Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
+
+#### Handling outliers
+Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
+
+#### Handling missings
+Missings are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
+
+#### Scaling, transform and augment data
+Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if we control the normalization of the inputs. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point was missing.
+The way the loss is formulated can heavily impact the performance of the model. Benchmarks showed that predicting the change versus the last non missing value works significantly better than predicting next values. This simple change biases the model to predict no change and reserve modeling capacity to focus on true factors of variation.
+Incorporating features of the time of the day also showed to help benchmarks significantly. These include periodical features on the hour, day, week and year. Features are calculated by a polar transformation.
+Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the deep learning model section.
 
 
-### <a name="strategy"><a> Strategy
 
 
 ### <a name="featEng"><a> Feature engineering
