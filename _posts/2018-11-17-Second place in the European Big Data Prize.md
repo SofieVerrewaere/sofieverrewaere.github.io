@@ -46,6 +46,7 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 * Interpolated values
 
 
+
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
 
