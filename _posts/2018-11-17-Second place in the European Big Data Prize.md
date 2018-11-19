@@ -40,9 +40,9 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 The most important steps of the data preprocessing approach are discussed below.
 
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
-* *Short outlier bursts (1 to 10 data points)
-* *Zero values (ranging from 1 data point to long sequences of missing (?) data)
-* *Interpolated values
+* Short outlier bursts (1 to 10 data points)
+* Zero values (ranging from 1 data point to long sequences of missing (?) data)
+* Interpolated values
 
 
 #### Handling interpolated values
@@ -69,15 +69,15 @@ Series that are zero / missing for most of the individual series will be treated
 ### <a name="featEng"><a> Feature engineering
 
 The predictors used in the final model are:
-+The current value and a flag if it is missing
-+Periodical features of the part of the day (sin/cos projection)
-+Periodical features of the part of the week (sin/cos projection)
-+Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values (more detailed info is given below in §input).
-+Lagged missings (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/Missings
-+Last not missing value: relative change of the lagged values/missing
-+Number of consecutive zeros: scaled [0,1], 
-   +1: >= 300 consecutive values, 
-   +0: no zeros
+* The current value and a flag if it is missing
+* Periodical features of the part of the day (sin/cos projection)
+* Periodical features of the part of the week (sin/cos projection)
+* Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values (more detailed info is given below in §input).
+* Lagged missings (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/Missings
+* Last not missing value: relative change of the lagged values/missing
+* Number of consecutive zeros: scaled [0,1], 
+   * 1: >= 300 consecutive values, 
+   * 0: no zeros
 
 
 
