@@ -40,6 +40,7 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 The most important steps of the data preprocessing approach are discussed below.
 
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
+
 * Short outlier bursts (1 to 10 data points)
 * Zero values (ranging from 1 data point to long sequences of missing (?) data)
 * Interpolated values
@@ -69,6 +70,7 @@ Series that are zero / missing for most of the individual series will be treated
 ### <a name="featEng"><a> Feature engineering
 
 The predictors used in the final model are:
+
 * The current value and a flag if it is missing
 * Periodical features of the part of the day (sin/cos projection)
 * Periodical features of the part of the week (sin/cos projection)
@@ -81,9 +83,16 @@ The predictors used in the final model are:
 
 
 
-### <a name="baseModels"><a> Base models
+### <a name="deepLearningModel"><a> Deep Learning Model
 
-### <a name="baseModelComb"><a> Base model combination
+The deep learning model consist of 3 different mlp’s and one optimizer. 
+
+* Embedding mlp: Aims to incorporate a differentiating between individual time series. Translates one-hot encoding predictors to embedding, which is used as input for the zero model and the continuous model. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
+* Zero model mlp: Predicts the probability of the values being zero (0/1).
+* Continuous model mlp: Predicts the continuous targets
+* Optimizer: One adam optimizer is used for both models, the cost is defined as follows:
+      Total cost: mse continuous model + fraction * cross entropy zero model + L2 penalty*L2 variable norm
+
 
 
 ### <a name="postProcessing"><a> Post-processing
