@@ -76,9 +76,11 @@ Not all the time series are used to feed the deep learning model. The time serie
 ![Scenario 1](/img/EC/scenario1.jpg)
 
 * Scenario 2: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+
 ![Scenario 2](/img/EC/scenario2.jpg)
 
 * Scenario 3: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
+
 ![Scenario 3](/img/EC/scenario3.jpg)
 
 
