@@ -69,6 +69,18 @@ Series that are zero / missing for most of the individual series will be treated
 
 ### <a name="featEng"><a> Feature engineering
 
+The predictors used in the final model are:
++The current value and a flag if it is missing
++Periodical features of the part of the day (sin/cos projection)
++Periodical features of the part of the week (sin/cos projection)
++Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values (more detailed info is given below in §input).
++Lagged missings (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/Missings
++Last not missing value: relative change of the lagged values/missing
++Number of consecutive zeros: scaled [0,1], 
+   +1: >= 300 consecutive values, 
+   +0: no zeros
+
+
 
 ### <a name="baseModels"><a> Base models
 
