@@ -17,7 +17,6 @@ This blog post will cover all sections to go from the raw data to the final subm
 * *[Introduction](#introduction)*
 * *[Model Approach](#modelApproach)*
    * *[Pre-Processing](##preProcessing)*
-   * *[Strategy](##strategy)*
    * *[Feature engineering](##featEng)*
    * *[Base models](##baseModels)*
    * *[Base model combination](##baseModelComb)*
@@ -41,9 +40,9 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 The most important steps of the data preprocessing approach are discussed below.
 
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
-+Short outlier bursts (1 to 10 data points)
-+Zero values (ranging from 1 data point to long sequences of missing (?) data)
-+Interpolated values
+* *Short outlier bursts (1 to 10 data points)
+* *Zero values (ranging from 1 data point to long sequences of missing (?) data)
+* *Interpolated values
 
 
 #### Handling interpolated values
