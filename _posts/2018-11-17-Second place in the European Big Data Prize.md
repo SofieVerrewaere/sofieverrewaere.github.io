@@ -18,8 +18,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 * *[Model Approach](#modelApproach)*
    * *[Pre-Processing](##preProcessing)*
    * *[Feature engineering](##featEng)*
-   * *[Base models](##baseModels)*
-   * *[Base model combination](##baseModelComb)*
+   * *[Model Architecture](##modelArchitecture)*
    * *[Post-processing](##postProcessing)*
    * *[Conclusion](##conclusion)*
 * *[Closing Remarks](#closingRemarks)*
@@ -103,17 +102,36 @@ The predictors used in the final model are:
 
 
 
-### <a name="deepLearningModel"><a> Deep Learning Model
+### <a name="modelArchitecture"><a> Model Architecture
 
 The deep learning model consist of 3 different mlp’s and one optimizer. 
 
 * Embedding mlp: Aims to incorporate a differentiating between individual time series. Translates one-hot encoding predictors to embedding, which is used as input for the zero model and the continuous model. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
 * Zero model mlp: Predicts the probability of the values being zero (0/1).
 * Continuous model mlp: Predicts the continuous targets
-* Optimizer: One adam optimizer is used for both models, the cost is defined as follows:
+* Optimizer: One adam optimizer is used for both models, 
+![Model](/img/EC/model_architecture.jpg)
+
+#### Targets
+
+One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
+* A zero-model, predicting the probability* of the next value being a zero or not (when the current value is not missing) 
+  * Targets: 12** binary targets  
+* A Continuous model, predicting the real value (when the current value is not zero or missing)
+  * Targets: 12** continuous targets
+  
+The get to the final prediction, the targets of the two models are multiplied as follows: 
+ 
+  Final prediction = (1 - probability being zero) * continuous prediction
+  
+(*) probabilities were clipped: >0.99~1, <0.01~0
+(**) depends on the prediction horizon
+
+
+#### Loss
+
+the cost is defined as follows:
       Total cost: mse continuous model + fraction * cross entropy zero model + L2 penalty*L2 variable norm
-
-
 
 ### <a name="postProcessing"><a> Post-processing
 
