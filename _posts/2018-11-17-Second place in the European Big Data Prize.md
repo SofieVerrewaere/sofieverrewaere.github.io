@@ -37,6 +37,7 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 
 ### <a name="preProcessing"><a> Pre-processing
+
 The most important steps of the data preprocessing approach are discussed below.
 
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
@@ -45,16 +46,18 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 * Zero values (ranging from 1 data point to long sequences of missing (?) data)
 * Interpolated values
 
-
+#### Handling outliers
+Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
+![Remove Outliers](/img/EC/remove_outliers.jpg)
 
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
+![Remove Interpolations](/img/EC/remove_interpolations.jpg)
 
 #### Handling zero values
 Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
+![Split into two series](/img/EC/split_into_2_series.jpg)
 
-#### Handling outliers
-Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
 
 #### Handling missings
 Missings are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
