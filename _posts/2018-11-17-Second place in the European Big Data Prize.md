@@ -101,20 +101,20 @@ The predictors used in the final model are:
 
 The deep learning model consist of 3 different mlp’s and one optimizer. 
 
-* Embedding mlp: Aims to incorporate a differentiating between individual time series. Translates one-hot encoding predictors to embedding, which is used as input for the zero model and the continuous model. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
-* Zero model mlp: Predicts the probability of the values being zero (0/1).
-* Continuous model mlp: Predicts the continuous targets
-* Optimizer: One adam optimizer is used for both models
+* <b>Embedding mlp</b>: Aims to incorporate a differentiating between individual time series. Translates one-hot encoding predictors to embedding, which is used as input for the zero model and the continuous model. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
+* <b>Zero model mlp</b>: Predicts the probability of the values being zero (0/1).
+* <b>Continuous model mlp</b>: Predicts the continuous targets
+* <b>Optimizer</b>: One adam optimizer is used for both models
 
-{% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Archtiecture </small>" %}
+{% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Architecture </small>" %}
 
 #### Targets
 
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
-* A zero-model, predicting the probability* of the next value being a zero or not (when the current value is not missing) 
-  * Targets: 12** binary targets  
+* A zero-model, predicting the probability<sup>*</sup> of the next value being a zero or not (when the current value is not missing) 
+  * Targets: 12<sup>**</sup> binary targets  
 * A Continuous model, predicting the real value (when the current value is not zero or missing)
-  * Targets: 12** continuous targets
+  * Targets: 12<sup>**</sup> continuous targets
   
 The get to the final prediction, the targets of the two models are multiplied as follows: 
  
