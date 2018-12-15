@@ -118,16 +118,18 @@ One of the major difficulties of this competition lies in the number of zeros in
   
 The get to the final prediction, the targets of the two models are multiplied as follows: 
  
- <b> Final prediction = (1 - probability being zero) * continuous prediction </b>
+<b> Final prediction = (1 - probability being zero) * continuous prediction </b>
   
 <sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
+
 <sub> (**) depends on the prediction horizon </sub>
 
 
 #### Loss
 
 The cost is defined as follows:
-      <b>  Total cost: mse continuous model + fraction x cross entropy zero model + L2 penalty x L2 variable norm </b> 
+
+<b>  Total cost = mse continuous model + fraction x cross entropy zero model + L2 penalty x L2 variable norm </b> 
 
 ### <a name="postProcessing"><a> Post-processing
 
