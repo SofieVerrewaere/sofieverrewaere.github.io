@@ -27,9 +27,8 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 
 
- <a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Rules of the contest </b></a>
-
-<b>From the competition page</b>: Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
+<a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Rules of the contest </b></a>
+From the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"<b>competition page </b></a>: Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
 
 Access to information in a timely way could have a positive impact on the way we consume energy, the way we organise our transport systems and even the way we run our health and other public services. Predicting consumption patterns must be accurate, and need to be delivered in real-time which will allow for effective action such as the use of energy resources in an optimal fashion. Faster, more accurate and resource-efficient prediction methods will result in more efficient management of sectors of the economy. Indeed today, these predictions are not always accurate and lead to the wasteful consumption of energy resources.
 
