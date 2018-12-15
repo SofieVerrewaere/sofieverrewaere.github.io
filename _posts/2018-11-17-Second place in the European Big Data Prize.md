@@ -49,7 +49,7 @@ participants' working software. Yet another data set, verification data (data fr
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
 Prior to the opening of the contest platform, a starting kit was provided. This is a simulator of the contest platform that allows a participant to get familiar with the contest running environment and allows for the testing of the working software against sample datasets, representative to the actual test
-dataset.
+dataset. 
 
 One of the difficulties of this challenge is the unkown test distribution, which makes it very difficult to improve the model. As little is know of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
 
@@ -68,21 +68,21 @@ Short burst outliers are removed from the training data and are ignored complete
 
 
 #### Handling interpolated values
-The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
+The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
 {% include image.html url="/img/EC/remove_interpolations.jpg" description="<small>Removing Interpolations</small>" %}
 
 #### Handling zero values
-Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
+Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values is captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
 {% include image.html url="/img/EC/split_into_2_series.jpg" description="<small>Split time series into a 2 series, one for zero values (0/1), one for regular values[0,1]</small>" %}
 
 #### Handling missing values
-Missing values are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
+Missing values are interpolated before doing the preprocessing, this results in those data points being ignored in the model fitting.
 
 #### Scaling, transform and augment data
-Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if we control the normalization of the inputs. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point was missing.
+Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if the inputs are normalized. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point is a missing value.
 The way the loss is formulated can heavily impact the performance of the model. Benchmarks showed that predicting the change versus the last non missing value works significantly better than predicting next values. This simple change biases the model to predict no change and reserve modeling capacity to focus on true factors of variation.
 Incorporating features of the time of the day also showed to help benchmarks significantly. These include periodical features on the hour, day, week and year. Features are calculated by a polar transformation.
-Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the deep learning model section.
+Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the input of the deep learning model.
 
 #### Input Deep Learning Model
 Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
@@ -98,7 +98,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 ##### Moving window approach and update of model parameters
-In the training phase, all possible data was taking into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of  steps and the forecast horizon are determined in the file taskParameters.ini which was foreseen by the EU. They are read in once on the first call of the main.py file which is the only script called by predict.sh.
+In the training phase, all possible data was taking into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in validation phase.</small>" %}
 
 The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the validation phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
@@ -108,13 +108,13 @@ The deep learning model can be (but is not in the final submission) (pre-)traine
 
 The predictors used in the final model are:
 
-* The current value and a flag if it is missing
+* The current value and a flag if it is missing value
 * Periodical features of the part of the day (sin/cos projection)
 * Periodical features of the part of the week (sin/cos projection)
-* Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values (more detailed info is given below in §input).
+* Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values
 * Lagged missing values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/missing values
-* Last not missing value: relative change of the lagged values/missing
-* Number of consecutive zeros: scaled [0,1], 
+* Last not missing value: relative change of the lagged values/missing value
+* Number of consecutive zeros: scaled [0,1]:
    * 1: >= 300 consecutive values, 
    * 0: no zeros
 
