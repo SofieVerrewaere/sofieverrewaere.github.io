@@ -49,7 +49,8 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 
 #### Handling outliers
 Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
-![Remove Outliers](/img/EC/remove_outliers.jpg)
+{% include image.html url="/img/EC/remove_outliers.jpg" description="Removing Outliers" %}
+
 
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
