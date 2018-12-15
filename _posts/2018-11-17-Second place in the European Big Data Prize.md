@@ -40,11 +40,11 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 ### Challenge?
 The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
 
-The solutions are ranked based on the Accuracy of the prediction, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the prediction, low use of computing resources expressed as the <b>"overall elapsed execution time" (OEET)</b>.
+The solutions are ranked based on the accuracy of the prediction, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the prediction, low use of computing resources expressed as the <b>"overall elapsed execution time" (OEET)</b>.
 
-A training and validation (in the glossary of the competition this is reffered to as the adapt data set) data set were provided. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
+A <b>training</b> and <b>validation data set</b> were given (in the glossary of the competition this is reffered to as the adapt data set). These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
 
-The EU provided the contest platform on which the working software submissions are run against a test data. The
+The EU provided the contest platform on which the working software submissions are run against a <b>test data</b>. The
 contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission.
 
 At the contest platform, a different set of testing data, not accessible to the participants, was used for testing, and to score and pre-rank the
