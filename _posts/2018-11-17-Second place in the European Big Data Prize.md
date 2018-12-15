@@ -54,12 +54,11 @@ Short burst outliers were removed from the training data and are ignored complet
 
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. The starting kit contains one observation for each 5-minute time step but the real data is not going to be in this format. The organisers announced that the input data will contain arbitrary time gaps. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
-![Remove Interpolations](/img/EC/remove_interpolations.jpg)
+{% include image.html url="/img/EC/remove_interpolations.jpg" description="Removing Interpolations" %}
 
 #### Handling zero values
 Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
-![Split into two series](/img/EC/split_into_2_series.jpg)
-
+{% include image.html url="/img/EC/split_into_2_series.jpg" description="Split time series into a 2 series, one for zero values (0/1), one for regular values" %}
 
 #### Handling missings
 Missings are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
