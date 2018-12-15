@@ -45,7 +45,7 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 * Short outlier bursts (1 to 10 data points)
 * Zero values (ranging from 1 data point to long sequences of missing (?) data)
 * Interpolated values
-
+***
 
 #### Handling outliers
 Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
