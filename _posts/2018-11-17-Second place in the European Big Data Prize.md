@@ -24,7 +24,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 ## <a name="introduction"><a> Introduction
 
-First of all I would like to thank the EU for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
+First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
 
 ### Why this prize?
 The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page</b></a>.
@@ -40,16 +40,18 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 ### Challenge?
 The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
 
-The solutions are ranked based on the accuracy of the prediction, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the prediction, low use of computing resources expressed as the <b>"overall elapsed execution time" (OEET)</b>.
+The solutions are ranked based on the accuracy of the predictions, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the predictions expressed as the <b>"overall elapsed execution time" (OEET)</b>.
 
-A <b>training</b> and <b>validation data set</b> were given (in the glossary of the competition this is reffered to as the adapt data set). These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
+The challenge requires the submission of code that can handle any type of panel data. Panel data consists of multi-dimensional data involving measurements over time. The time series are split up in time in a train and an adapt phase. The adapt phase simulates new incoming data. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. 
 
-The EU provided the contest platform on which the working software submissions are run against a <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission and was used for testing, and to score and pre-rank the
+Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
+
+The EC provided the contest platform on which the working software submissions are run against the <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission and was used for testing, and to score and pre-rank the
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
 Prior to the opening of the contest platform, a starting kit was provided. This is a simulator of the contest platform that allows a participant to get familiar with the contest running environment and allows for the testing of the working software against sample datasets, representative to the actual test
-dataset. 
+dataset. Specifically, the starting kit consists of 1916 time series with a train period of just over one year and an adapt period of approximately three months.
 
 One of the difficulties of this challenge is the unkown test distribution, which makes it very difficult to improve the model. As little is know of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
 
@@ -85,23 +87,23 @@ Incorporating features of the time of the day also showed to help benchmarks sig
 Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the input of the deep learning model.
 
 #### Input Deep Learning Model
-Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
+Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the adapt phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
-* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. This is a folder for cache files in the output directory. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. This is a folder for cache files in the output directory. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
-* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the validation phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or drop below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or drop below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
-* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the validation phase. Scaling parameters are determined in the validation phase. 
+* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 ##### Moving window approach and update of model parameters
-In the training phase, all possible data was taken into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
-{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in validation phase.</small>" %}
+In the training phase, all possible data was taken into account. In the adapt phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
+{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in adapt phase.</small>" %}
 
-The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the validation phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
+The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
 {% include image.html url="/img/EC/model_update.jpg" description="<small>Data Flow</small>" %}
 
 ### <a name="featEng"><a> Feature engineering
