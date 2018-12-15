@@ -45,7 +45,7 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 * Short outlier bursts (1 to 10 data points)
 * Zero values (ranging from 1 data point to long sequences of missing (?) data)
 * Interpolated values
-***
+
 
 #### Handling outliers
 Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
@@ -75,15 +75,15 @@ Not all the time series are used to feed the deep learning model. The time serie
 
 ![Split data](/img/EC/splitdata.jpg)
 
-* Scenario 1: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
+* *Scenario 1*: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
 
 ![Scenario 1](/img/EC/scenario1.jpg)
 
-* Scenario 2: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+* *Scenario 2*: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
 
 ![Scenario 2](/img/EC/scenario2.jpg)
 
-* Scenario 3: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
+* *Scenario 3*: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
 
 ![Scenario 3](/img/EC/scenario3.jpg)
 
