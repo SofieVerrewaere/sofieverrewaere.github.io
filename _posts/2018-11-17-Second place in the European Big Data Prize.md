@@ -40,16 +40,14 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 ### Challenge?
 The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
 
-The solutions are ranked based on the Accuracy of the prediction, expressed as "root-mean square error" (RMSE)  and the speed of delivery of the prediction, low use of computing resources expressed as the "overall elapsed execution time" (OEET).
+The solutions are ranked based on the Accuracy of the prediction, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the prediction, low use of computing resources expressed as the <b>"overall elapsed execution time" (OEET)</b>.
+
+A training and validation (in the glossary of the competition this is reffered to as the adapt data set) data set were provided. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
 
 The EU provided the contest platform on which the working software submissions are run against a test data. The
 contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission.
 
-A training and validation (in the glossary of the competition this is reffered to as the adapt data set) data set were provided. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
-
-
-At the contest platform, a
-different set of testing data, not accessible to the participants, was used for testing, and to score and pre-rank the
+At the contest platform, a different set of testing data, not accessible to the participants, was used for testing, and to score and pre-rank the
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
@@ -58,7 +56,7 @@ One of the difficulties of this challenge was the unkown test distribution, whic
 
 ## <a name="modelApproach"><a> Model Approach
 
-This section aims to summarize on a high level the modeling strategy of the competition approach.All logic is implemented in Python, which is GPL compatible. The Tensorflow package is used to train and load deep learning models.Tensorflow was used for deep learning in Python. Pandas for tabular data handling and numpy for numeric computations. Multiprocessing is used to parallelize the computations.
+This section aims to summarize on a high level the modeling strategy of the competition approach. All logic is implemented in Python, which is GPL compatible. The Tensorflow package is used to train and load deep learning models.Tensorflow was used for deep learning in Python. Pandas for tabular data handling and numpy for numeric computations. Multiprocessing is used to parallelize the computations.
 
 ### <a name="preProcessing"><a> Pre-processing
 
@@ -66,9 +64,10 @@ The most important steps of the data preprocessing approach are discussed below.
 
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
 
-* Short outlier bursts (1 to 10 data points)
-* Zero values (ranging from 1 data point to long sequences of missing (?) data)
+* Short outlier bursts 
 * Interpolated values
+* Zero values 
+
 
 
 #### Handling outliers
