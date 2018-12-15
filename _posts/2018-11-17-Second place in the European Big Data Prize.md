@@ -48,27 +48,22 @@ The EU provided the contest platform on which the working software submissions a
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
-One of the difficulties of this challenge was the unkown test distribution, which made it very difficult to improve the model. As little was know of the unseen test data conservative parameter settings were used in the final submission. Lot's of inductive biases were used to ease the heavy lifting of the required model. These inductive biases will be stressed throughout the Model Approach.
+Prior to the opening of the contest platform, a starting kit was provided. This is a simulator of the contest platform that allows a participant to get familiar with the contest running environment and allows for the testing of the working software against sample datasets, representative to the actual test
+dataset.
+
+One of the difficulties of this challenge is the unkown test distribution, which makes it very difficult to improve the model. As little is know of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
 
 
 ## <a name="modelApproach"><a> Model Approach
 
-This section aims to summarize on a high level the modeling strategy of the competition approach. All logic is implemented in Python, which is GPL compatible. The Tensorflow package is used to train and load deep learning models.Tensorflow was used for deep learning in Python. Pandas for tabular data handling and numpy for numeric computations. Multiprocessing is used to parallelize the computations.
+This section aims to summarize on a high level the modeling strategy of the competition approach. All logic is implemented in <b>Python</b>, which is GPL compatible. The Tensorflow package is used to train and load deep learning models. <b>Tensorflow</b> is used for deep learning in Python. <b>Pandas</b> for tabular data handling and <b>numpy</b> for numeric computations. <b>Multiprocessing</b> is used to parallelize the computations.
 
 ### <a name="preProcessing"><a> Pre-processing
 
-The most important steps of the data preprocessing approach are discussed below.
-
-The raw data contains all sorts of unusual time series patterns of which the following three are the most important:
-
-* Short outlier bursts 
-* Interpolated values
-* Zero values 
-
-
+The most important steps of the data preprocessing approach are discussed below. The raw data contains all sorts of unusual time series patterns of which the following three are the most important: <b>Short outlier bursts</b>, <b>Interpolated values</b> and <b>Zero values<b/>. 
 
 #### Handling outliers
-Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
+Short burst outliers are removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
 {% include image.html url="/img/EC/remove_outliers.jpg" description="<small>Removing Outliers</small>" %}
 
 
@@ -80,8 +75,8 @@ The interpolated values are an artefact of the preprocessing logic in the starti
 Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
 {% include image.html url="/img/EC/split_into_2_series.jpg" description="<small>Split time series into a 2 series, one for zero values (0/1), one for regular values[0,1]</small>" %}
 
-#### Handling missings
-Missings are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
+#### Handling missing values
+Missing values are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
 
 #### Scaling, transform and augment data
 Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if we control the normalization of the inputs. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point was missing.
@@ -90,10 +85,10 @@ Incorporating features of the time of the day also showed to help benchmarks sig
 Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the deep learning model section.
 
 #### Input Deep Learning Model
-Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missings. Series consisting of more than 90% of missings in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
+Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
-* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
 * <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the validation phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
@@ -117,7 +112,7 @@ The predictors used in the final model are:
 * Periodical features of the part of the day (sin/cos projection)
 * Periodical features of the part of the week (sin/cos projection)
 * Lagged values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): first and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values (more detailed info is given below in §input).
-* Lagged missings (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/Missings
+* Lagged missing values (1, 2, 3, 4, 5, 6, 7, 10, …, 296): True/False/missing values
 * Last not missing value: relative change of the lagged values/missing
 * Number of consecutive zeros: scaled [0,1], 
    * 1: >= 300 consecutive values, 
