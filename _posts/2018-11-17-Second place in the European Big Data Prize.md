@@ -16,11 +16,11 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 * *[Introduction](#introduction)*
 * *[Model Approach](#modelApproach)*
-   * *[Pre-Processing](##preProcessing)*
-   * *[Feature engineering](##featEng)*
-   * *[Model Architecture](##modelArchitecture)*
-   * *[Post-processing](##postProcessing)*
-   * *[Conclusion](##conclusion)*
+   * *[Pre-Processing](#preProcessing)*
+   * *[Feature engineering](#featEng)*
+   * *[Model Architecture](#modelArchitecture)*
+   * *[Post-processing](##ostProcessing)*
+   * *[Conclusion](#conclusion)*
 * *[Closing Remarks](#closingRemarks)*
 
 ## <a name="introduction"><a> Introduction
@@ -77,7 +77,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 * <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
-* <b>Scenario 2<b/>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
 * <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
