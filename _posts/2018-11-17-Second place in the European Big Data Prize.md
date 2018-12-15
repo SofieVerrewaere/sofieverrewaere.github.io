@@ -24,16 +24,15 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 ## <a name="introduction"><a> Introduction
 
+First of all I would like to thank the EU for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
 
-
-
-<a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Read the detailed rules of the contest </b></a>
-
-From the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page </b></a>: Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
+The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page</b></a>: Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
 
 Access to information in a timely way could have a positive impact on the way we consume energy, the way we organise our transport systems and even the way we run our health and other public services. Predicting consumption patterns must be accurate, and need to be delivered in real-time which will allow for effective action such as the use of energy resources in an optimal fashion. Faster, more accurate and resource-efficient prediction methods will result in more efficient management of sectors of the economy. Indeed today, these predictions are not always accurate and lead to the wasteful consumption of energy resources.
 
 The European Commission has launched the Big Data Technologies Horizon Prize to address this issue. The goal is to develop a new spatiotemporal forecasting method which are able to beat ones currently available.
+
+<a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Read the detailed rules of the contest </b></a>
 
 
 ## <a name="modelApproach"><a> Model Approach
