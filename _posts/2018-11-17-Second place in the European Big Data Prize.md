@@ -88,17 +88,17 @@ Series that are zero / missing for most of the individual series will be treated
 Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
-* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. This is a folder for cache files in the output directory. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
-* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the validation phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the validation phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or drop below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
 * <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the validation phase. Scaling parameters are determined in the validation phase. 
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 ##### Moving window approach and update of model parameters
-In the training phase, all possible data was taking into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
+In the training phase, all possible data was taken into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in validation phase.</small>" %}
 
 The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the validation phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
