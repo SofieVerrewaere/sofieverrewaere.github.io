@@ -50,7 +50,7 @@ different set of testing data, not accessible to the participants, was used for 
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
-One of the difficulties of this challenge was the unkown test distribution, which made it very difficult to improve the model. As little was know of the unseen test data conservative parameter settings were used in the final submission. Lot's of inductive biases were used to ease the heavy lifting of the required model. These inductive biases will be stressed in throughout the Model Approach.
+One of the difficulties of this challenge was the unkown test distribution, which made it very difficult to improve the model. As little was know of the unseen test data conservative parameter settings were used in the final submission. Lot's of inductive biases were used to ease the heavy lifting of the required model. These inductive biases will be stressed throughout the Model Approach.
 
 
 ## <a name="modelApproach"><a> Model Approach
@@ -91,23 +91,23 @@ Incorporating features of the time of the day also showed to help benchmarks sig
 Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the deep learning model section.
 
 #### Input Deep Learning Model
-Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missings. Series consisting of more than 90% of missings in the train phase are considered invalid. However, the status (valid/invalid) can change in the adapt phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
+Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missings. Series consisting of more than 90% of missings in the train phase are considered invalid. However, the status (valid/invalid) can change in the validation phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
-* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and validation phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the validation phase the scaling parameters are reloaded and used to scale the validation time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
-* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+* <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the validation phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
-* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
+* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the validation phase. Scaling parameters are determined in the validation phase. 
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 ##### Moving window approach and update of model parameters
-In the training phase, all possible data was taking into account. In the adapt phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of  steps and the forecast horizon are determined in the file taskParameters.ini which was foreseen by the EU. They are read in once on the first call of the main.py file which is the only script called by predict.sh.
-{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in adapt phase.</small>" %}
+In the training phase, all possible data was taking into account. In the validation phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of  steps and the forecast horizon are determined in the file taskParameters.ini which was foreseen by the EU. They are read in once on the first call of the main.py file which is the only script called by predict.sh.
+{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in validation phase.</small>" %}
 
-The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
+The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the validation phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
 {% include image.html url="/img/EC/model_update.jpg" description="<small>Data Flow</small>" %}
 
 ### <a name="featEng"><a> Feature engineering
