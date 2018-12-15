@@ -72,21 +72,16 @@ Series that are zero / missing for most of the individual series will be treated
 #### Input Deep Learning Model
 
 Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missings. Series consisting of more than 90% of missings in the train phase are considered invalid. However, the status (valid/invalid) can change in the adapt phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
+{% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
-![Split data](/img/EC/splitdata.jpg)
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
+{% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
-* *Scenario 1*: Scenario 1 applies to series which are valid at all times (train and adapt phase). The number of missings are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and saved in the Cache folder. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
+* <b>Scenario 2<b/>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
+{% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
-![Scenario 1](/img/EC/scenario1.jpg)
-
-* *Scenario 2*: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or sink below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence.
-
-![Scenario 2](/img/EC/scenario2.jpg)
-
-* *Scenario 3*: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
-
-![Scenario 3](/img/EC/scenario3.jpg)
-
+* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
+{% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 ### <a name="featEng"><a> Feature engineering
 
