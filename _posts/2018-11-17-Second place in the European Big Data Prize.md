@@ -45,7 +45,10 @@ The solutions are ranked based on the Accuracy of the prediction, expressed as "
 The EU provided the contest platform on which the working software submissions are run against a test data. The
 contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission.
 
-A training and validation data set were provided. At the contest platform, a
+A training and validation (in the glossary of the competition this is reffered to as the adapt data set) data set were provided. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
+
+
+At the contest platform, a
 different set of testing data, not accessible to the participants, was used for testing, and to score and pre-rank the
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
