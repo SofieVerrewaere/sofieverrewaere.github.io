@@ -34,7 +34,7 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 ## <a name="modelApproach"><a> Model Approach
 
-INTRO
+This section aims to summarize on a high level the modeling strategy of the competition approach.All logic is implemented in Python, which is GPL compatible. The Tensorflow package is used to train and load deep learning models.Tensorflow was used for deep learning in Python. Pandas for tabular data handling and numpy for numeric computations. Multiprocessing is used to parallelize the computations.
 
 ### <a name="preProcessing"><a> Pre-processing
 
