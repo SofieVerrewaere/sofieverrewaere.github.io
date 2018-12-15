@@ -19,11 +19,15 @@ This blog post will cover all sections to go from the raw data to the final subm
    * *[Pre-Processing](#preProcessing)*
    * *[Feature engineering](#featEng)*
    * *[Model Architecture](#modelArchitecture)*
-   * *[Post-processing](##ostProcessing)*
    * *[Conclusion](#conclusion)*
 * *[Closing Remarks](#closingRemarks)*
 
 ## <a name="introduction"><a> Introduction
+
+
+
+
+ <a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Rules of the contest </b></a>
 
 <b>From the competition page</b>: Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
 
@@ -137,12 +141,14 @@ The cost is defined as follows:
 
 <b>  Total cost = mse continuous model + fraction x cross entropy zero model + L2 penalty x L2 variable norm </b> 
 
-### <a name="postProcessing"><a> Post-processing
+
 
 
 ### <a name="conclusion"><a> Conclusion
 
 ## <a name="closingRemarks"><a> Closing Remarks
+
+
 
 
 #### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
