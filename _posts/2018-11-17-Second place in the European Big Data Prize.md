@@ -26,7 +26,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 First of all I would like to thank the EU for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
 
-#### Why this prize?
+### Why this prize?
 The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page</b></a>.
 
 Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
@@ -37,8 +37,8 @@ The European Commission has launched the Big Data Technologies Horizon Prize to 
 
 <a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Read the detailed rules of the contest </b></a>
 
-#### Challenge?
-The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize is rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
+### Challenge?
+The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
 
 The solutions are ranked based on the Accuracy of the prediction, expressed as "root-mean square error" (RMSE)  and the speed of delivery of the prediction, low use of computing resources expressed as the "overall elapsed execution time" (OEET).
 
@@ -50,7 +50,7 @@ different set of testing data, not accessible to the participants, was used for 
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
 period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
-One of the difficulties of this challenge was the unkown test distribution, which made it very difficult to improve the model. As little was know of the unseen test data conservative parameter settings were used in the final submission. Lot's of inductive biases were used to ease the heavy lifting of the required model.
+One of the difficulties of this challenge was the unkown test distribution, which made it very difficult to improve the model. As little was know of the unseen test data conservative parameter settings were used in the final submission. Lot's of inductive biases were used to ease the heavy lifting of the required model. These inductive biases will be stressed in throughout the Model Approach.
 
 
 ## <a name="modelApproach"><a> Model Approach
