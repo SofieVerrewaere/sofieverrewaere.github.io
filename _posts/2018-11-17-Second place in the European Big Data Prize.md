@@ -49,7 +49,7 @@ The raw data contains all sorts of unusual time series patterns of which the fol
 
 #### Handling outliers
 Short burst outliers were removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
-{% include image.html url="/img/EC/remove_outliers.jpg" description="Removing Outliers" %}
+{% include image.html url="/img/EC/remove_outliers.jpg" description="<small>Removing Outliers</small>" %}
 
 
 #### Handling interpolated values
@@ -58,7 +58,7 @@ The interpolated values are an artefact of the preprocessing logic in the starti
 
 #### Handling zero values
 Zero values occur frequently in the training data (about one in three data points) and require a special treatment. The huge amount of zero values was captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value which corresponds to the regression target in expectation. 
-{% include image.html url="/img/EC/split_into_2_series.jpg" description="Split time series into a 2 series, one for zero values (0/1), one for regular values[0,1]" %}
+{% include image.html url="/img/EC/split_into_2_series.jpg" description="<small>Split time series into a 2 series, one for zero values (0/1), one for regular values[0,1]</small>" %}
 
 #### Handling missings
 Missings are interpolated before doing the preprocessing, this will result in those data points being ignored in the model fitting.
