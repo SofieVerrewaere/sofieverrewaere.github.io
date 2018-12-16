@@ -89,7 +89,7 @@ Neural networks work better when the inputs are normalized. Techniques like batc
 
 The advantage of rescaling the time series is that one shared model can be used to predict all the time series. 
 
-The way the loss is formulated can heavily impact the performance of the model. Benchmarks showed that predicting the change versus the last non missing value works significantly better than predicting next values. This simple change biases the model to predict no change and reserves modeling capacity to focus on true factors of variation.
+The way the loss is formulated can heavily impact the performance of the model. Benchmarks on the starting kit data showed that predicting the change versus the last non missing value works significantly better than predicting next values. This simple change biases the model to predict no change and reserves modeling capacity to focus on true factors of variation.
 
 Incorporating features of the time of the day also showed to help benchmarks significantly. These include periodical features on the day and the week. I could have used hour and year but dropped those out of fear for overfitting. Features are calculated by a polar transformation.
 Series that are zero/missing for most of the individual series will be treated differently, this is further discussed in the input of the deep learning model.
