@@ -11,7 +11,7 @@ comments: true
 ## Overview
 <a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished joint second in the Big Data Technologies H2020 Prize!</b></a>
 
-The goal of this blog post is to explain my approach to a very challenging problem. I will cover the high level approach in design decissions that enabled me to be succesful. 
+The goal of this blog post is to explain my approach to a very challenging problem. I will cover the high level approach in design decisions that enabled me to be succesful. 
 Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
 
 * *[Introduction](#introduction)*
