@@ -132,7 +132,7 @@ To summarize, the considered predictors used in the final model are:
 * Last non missing value
 * Number of consecutive zeros: scaled [0, 1]:
    * 0: no zeros
-   * Number of consecutive zeros/300 for 0 < Number of consecutive zeros < 300
+   * 0 < 'Number of consecutive zeros' < 300: 'Number of consecutive zeros'/300
    * 1 otherwise
   
 
