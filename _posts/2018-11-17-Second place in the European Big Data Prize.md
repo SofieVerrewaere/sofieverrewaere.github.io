@@ -99,11 +99,10 @@ Not all the time series are used to feed the deep learning model. The time serie
 * <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined in the adapt phase. 
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
-##### Moving window approach and update of model parameters
-In the training phase, all possible data was taken into account. In the adapt phase, a moving window approach is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
+In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EU.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in adapt phase.</small>" %}
 
-The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the model (and scaling parameters in Scenario 3) get updated, every fixed number of steps.
+The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the <b>model</b> (and scaling parameters in Scenario 3) <b>gets updated, every fixed number of steps</b>.
 {% include image.html url="/img/EC/model_update.jpg" description="<small>Data Flow</small>" %}
 
 ### <a name="featEng"><a> Feature engineering
