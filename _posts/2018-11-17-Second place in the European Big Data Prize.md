@@ -42,19 +42,16 @@ The challenge is to improve the performance of software for the forecasting of g
 
 The solutions are ranked based on the accuracy of the predictions, expressed as <b>"root-mean square error" (RMSE) </b> and the speed of delivery of the predictions expressed as the <b>"overall elapsed execution time" (OEET)</b>.
 
-The challenge requires the submission of code that can handle any type of panel data. Panel data consists of multi-dimensional data involving measurements over time. The time series are split up in time in a train and an adapt phase. The adapt phase simulates new incoming data. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. 
+The challenge requires the submission of code that can handle any type of panel data. Panel data consists of multi-dimensional data involving measurements over time. The time series are split up in time in a <b>train</b> and an <b>adapt</b> phase. The adapt phase simulates new incoming data. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. 
 
-Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time. No information on the spatial component was given, therefore this was no spatial component was taken into account.
+Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time. No information on the spatial component was given, therefore no spatial component was taken into account.
 
-The EC provided the contest platform on which the working software submissions are run against the <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission and was used for testing, and to score and pre-rank the
-participants' working software. Yet another data set, verification data (data from the same process, but at a different time
-period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
+The EC provided the contest platform on which the working software submissions are run against the <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission and was used for testing, and to score and pre-rank the participants' working software. Yet another data set, verification data (data from the same process, but at a different time period) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
 Prior to the opening of the contest platform, a starting kit was provided. This is a simulator of the contest platform that allows a participant to get familiar with the contest running environment and allows for the testing of the working software against sample datasets, representative to the actual test
 dataset. Specifically, the starting kit consists of 1916 time series with a train period of just over one year and an adapt period of approximately three months.
 
 One of the difficulties of this challenge is the unkown test distribution, which makes it very difficult to improve the model. As little is know of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
-
 
 ## <a name="modelApproach"><a> Model Approach
 
@@ -67,7 +64,6 @@ The most important steps of the data preprocessing approach are discussed below.
 #### Handling outliers
 Short burst outliers are removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
 {% include image.html url="/img/EC/remove_outliers.jpg" description="<small>Removing Outliers</small>" %}
-
 
 #### Handling interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
@@ -82,9 +78,13 @@ Missing values are interpolated before doing the preprocessing, this results in 
 
 #### Scaling, transform and augment data
 Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if the inputs are normalized. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point is a missing value.
+
+The advantage of rescaling the time series is that one shared model can be used to predict all the time series. 
+
 The way the loss is formulated can heavily impact the performance of the model. Benchmarks showed that predicting the change versus the last non missing value works significantly better than predicting next values. This simple change biases the model to predict no change and reserve modeling capacity to focus on true factors of variation.
+
 Incorporating features of the time of the day also showed to help benchmarks significantly. These include periodical features on the hour, day, week and year. Features are calculated by a polar transformation.
-Series that are zero / missing for most of the individual series will be treated differently, this is further discussed in the input of the deep learning model.
+Series that are zero/missing for most of the individual series will be treated differently, this is further discussed in the input of the deep learning model.
 
 #### Input Deep Learning Model
 Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the adapt phase. Three possible scenarios are considered (displayed as 1, 2 and 3 in following figures). 
@@ -126,8 +126,8 @@ The deep learning model consist of 3 different mlp’s and one optimizer.
 
 * <b>Embedding mlp</b>: Aims to incorporate a differentiating between individual time series. Translates one-hot encoding predictors to embedding, which is used as input for the zero model and the continuous model. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
 * <b>Zero model mlp</b>: Predicts the probability of the values being zero (0/1).
-* <b>Continuous model mlp</b>: Predicts the continuous targets
-* <b>Optimizer</b>: One adam optimizer is used for all models
+* <b>Continuous model mlp</b>: Predicts the continuous targets (the change). The last layer weights of the change model are initialized near zero. Close to persistence as starting point instead of random change predictions.
+* <b>Optimizer</b>: One shared adam optimizer is used for all models
 
 {% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Architecture </small>" %}
 
@@ -161,14 +161,46 @@ The cost is defined as follows:
 
 ## <a name="closingRemarks"><a> Closing Remarks
 
+#### What can be transferred (reused) to other similar challenges?
+The <b>usage of neural networks (NN)</b> can be transferred to other challenges. Neural networks are the current state of the art when the problem involves a large amount of data, which is obviously the case here. Furthermore, NN allow maximum flexibility in defining the solution to very specific problems.
 
-
+The <b>usage of inductive biases</b>, which corresponds to the usage of a privileged information that eases the heavy lifting required by the model. These inductive biases are stressed throughout the blog post, but hereby a little overview:
+*	Explorative part in the data cleaning part is crucial for the success of the model
+*	Rescale time series so one shared model can be used
+*	Predict differences (change) instead of absolute values
+*	Combination of zero and change model
+*	Make use of a global (zero and change model) and local component (embedding) in model
+* Align the model output architecture with the evaluation metric. 
+*	Usage of persistence for worst timeseries
+*	Initialize last layer weights of change model near zero. Close to persistence as starting point instead of random change predictions.
 
 #### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
 
-#### In which otther fields would you see applications for similar prediction challenge and solutions?
+I would ensure that the multiprocessing is done on GPU's in the training phase. 
+I would do a proper hyperparameter tuning in the cloud - now conservative settings ar ues as little was known about the unseen data. 
 
-#### What would you recommend to young data scientist or students whou want to be succesful?
+#### How would you further improve the model to make it faster, more accurate?
+<b>To make it faster</b>: 
+*	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done one by one.
+* I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
+* I would optimize the compute time of the feature <i>Time since last non NA</i>, by programming a custom made library using C(++)>
+* Save time in the pre-processing by excluding time series with very little variation. 
+
+<b>To make it more accurate</b>: 
+* No auxilary sources were checked, incorporating auxilary data could further improve the model accuracy.
+* Get more information related to the test data. To give an example, what is the idea behind the interpolations? Are the interpolations also present in the test data?
+* The model could be made more global:
+    * pushing it to the extreme - all time series could be predicted at once
+    * or a possible middle ground - assign time series to k-clusters and perform batch predictions - this           would result in a group and a global encoding.
+* Integrating a feedback loop of earlier model predictions could further improve the model accuracy. The idea is to check how good the predictions were and to switch between models based on the prediction errors (e.g. if the predictions are worse then the persistence, stick with the persistence).
+* Now the model is updated at fixed predictions steps. This could be changed to adaptive steps depending on the feedback loop of the prediction errors. Or when new time series enter the measurements, make adaptations to the model. 
+
+#### In which other fields would you see applications for similar prediction challenge and solutions?
+Forecasting has applications in a wide range of fields where estimates of future conditions are useful. Not everything can be forecasted reliably, if the factors that relate to what is being forecast are known and well understood and there is a significant amount of data that can be used very reliable forecasts can often be obtained. 
+Other fields of applications are supply chain management, economic forecasting, earthquake prediction, egain forecasting, sales forecasting, weather forecasting, flood forecasting, Meteorology and many others ... .
+
+#### What would you recommend to young data scientist or students who want to be succesful?
+I would suggest to start with a study of various data science topics. Andrew Ng’s course is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. Kaggle is of course an excellent platform to do so. I am very impressed with the quality and general atmosphere on the forum and would suggest everyone to start competing!
 
 I look forward to your comments and suggestions.
 
