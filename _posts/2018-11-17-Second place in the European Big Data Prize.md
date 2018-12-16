@@ -24,7 +24,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 ## <a name="introduction"><a> Introduction
 
-First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
+First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
 
 ### Why this prize?
 The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page</b></a>.
@@ -44,7 +44,7 @@ The solutions are ranked based on the accuracy of the predictions, expressed as 
 
 The challenge requires the submission of code that can handle any type of panel data. Panel data consists of multi-dimensional data involving measurements over time. The time series are split up in time in a train and an adapt phase. The adapt phase simulates new incoming data. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1hour), resulting in a forecast horizon of 12 steps. 
 
-Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time.
+Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time. No information on the spatial component was given, therefore this was no spatial component was taken into account.
 
 The EC provided the contest platform on which the working software submissions are run against the <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, resource consumption) of each working software submission and was used for testing, and to score and pre-rank the
 participants' working software. Yet another data set, verification data (data from the same process, but at a different time
