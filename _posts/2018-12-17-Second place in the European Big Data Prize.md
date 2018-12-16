@@ -185,7 +185,7 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of privileg
 
 ### How would you further improve the model to make it faster, more accurate?
 <b>Increase speed</b>: 
-*	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done one by one.
+*	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done for each time series independently.
 * I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
 * I would optimize the compute time of the feature <i>Time since last non NA</i>, by programming a custom made library using C(++).
 * Save time in the pre-processing by excluding time series with very little variation. 
