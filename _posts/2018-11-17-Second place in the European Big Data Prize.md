@@ -146,7 +146,8 @@ The get to the final prediction, the targets of the two models are multiplied as
 
 The cost is defined as follows:
 
-<p style="text-align:center;"><b> Total cost = mse continuous model + 0.05 x cross entropy zero model + 1e-3 x L2 variable norm </b> </p> 
+<p style="text-align:center;"><b> Total cost = mse continuous model + 0.05 * cross entropy zero model + 1e-3
+* L2 variable norm </b> </p> 
 
 ### <a name="conclusion"><a> Conclusion
 
