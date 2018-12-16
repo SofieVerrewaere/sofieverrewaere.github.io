@@ -81,7 +81,7 @@ When the target is zero, the regular values target is unknown and is not incorpo
 
 
 #### Handling missing values
-Missing values are interpolated before doing the preprocessing, this results in those data points being ignored in the model fitting.
+Missing values are interpolated before doing the preprocessing, this results in those data points being ignored in the model fitting. It was unclear if actual missing values could be present in the raw data. 
 
 
 #### Scaling, transform and augment data
