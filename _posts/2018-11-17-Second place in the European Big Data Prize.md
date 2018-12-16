@@ -151,9 +151,11 @@ The cost is defined as follows:
 
 ### <a name="conclusion"><a> Conclusion
 
+TBC...
+
 ## <a name="closingRemarks"><a> Closing Remarks
 
-#### What can be transferred (reused) to other similar challenges?
+### What can be transferred (reused) to other similar challenges?
 The <b>usage of neural networks (NN)</b> can be transferred to other challenges. Neural networks are the current state of the art when the problem involves a large amount of data, which is obviously the case here. Furthermore, NN allow maximum flexibility in defining the solution to very specific problems.
 
 The <b>usage of inductive biases</b>, which corresponds to the usage of a privileged information that eases the heavy lifting required by the model. These inductive biases are stressed throughout the blog post, but hereby a little overview:
@@ -166,11 +168,11 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of a privil
 *	Usage of persistence for worst timeseries
 *	Initialize last layer weights of change model near zero. Close to persistence as starting point instead of random change predictions.
 
-#### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
+### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
 I would ensure that the multiprocessing is done on GPU's in the training phase. 
 I would do a proper hyperparameter tuning in the cloud - now conservative settings ar ues as little was known about the unseen data. 
 
-#### How would you further improve the model to make it faster, more accurate?
+### How would you further improve the model to make it faster, more accurate?
 <b>To make it faster</b>: 
 *	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done one by one.
 * I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
@@ -186,11 +188,11 @@ I would do a proper hyperparameter tuning in the cloud - now conservative settin
 * Integrating a feedback loop of earlier model predictions could further improve the model accuracy. The idea is to check how good the predictions were and to switch between models based on the prediction errors (e.g. if the predictions are worse then the persistence, stick with the persistence).
 * Now the model is updated at fixed predictions steps. This could be changed to adaptive steps depending on the feedback loop of the prediction errors. Or when new time series enter the measurements, make adaptations to the model. 
 
-#### In which other fields would you see applications for similar prediction challenge and solutions?
+### In which other fields would you see applications for similar prediction challenge and solutions?
 Forecasting has applications in a wide range of fields where estimates of future conditions are useful. Not everything can be forecasted reliably, if the factors that relate to what is being forecast are known and well understood and there is a significant amount of data that can be used very reliable forecasts can often be obtained. 
 Other fields of applications are supply chain management, economic forecasting, earthquake prediction, egain forecasting, sales forecasting, weather forecasting, flood forecasting, Meteorology and many others ... .
 
-#### What would you recommend to young data scientist or students who want to be succesful?
+### What would you recommend to young data scientist or students who want to be succesful?
 I would suggest to start with a study of various data science topics. Andrew Ng’s course is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. Kaggle is of course an excellent platform to do so. I am very impressed with the quality and general atmosphere on the forum and would suggest everyone to start competing!
 
 I look forward to your comments and suggestions.
