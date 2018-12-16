@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "European Commission Horizon 2020 prize on Big data Technologies"
+title: "European Commission Horizon 2020 prize on Big Data Technologies"
 subtitle:   "Second place and €400.000 award!"
 date:       2018-12-17 00:00:00
 author:     "Sofie Verrewaere"
