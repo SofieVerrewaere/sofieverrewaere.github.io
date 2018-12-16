@@ -60,7 +60,7 @@ This section aims to summarize the modeling strategy of the competition approach
 
 The most important steps of the data preprocessing approach are discussed below. 
 The motivation to perform the pre-processing as described below is to allow disentangling the major factors of variation observed in the starting kit data (long zero periods and true variation) with a single neural net.
-The raw data contains all sorts of unusual time series patterns of which the following three are the most important: <b>Short outlier bursts</b>, <b>Interpolated values</b> and <b>Zero values<b/>. 
+The raw data contains all sorts of unusual time series patterns of which the following three are the most important: <b>Short outlier bursts</b>, <b>Interpolated values</b> and <b>Zero values<b/>. All pre-processing steps use relative magnitude hyperparameters resulting in a scale invariant procedure.
 
 
 #### Handling outliers
