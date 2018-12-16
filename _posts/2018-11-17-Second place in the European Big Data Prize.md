@@ -131,8 +131,6 @@ The deep learning model consist of 3 different mlp’s and one optimizer.
 
 {% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Architecture </small>" %}
 
-#### Targets
-
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
 * A zero-model, predicting the probability<sup>*</sup> of the next value being a zero or not (when the current value is not missing) 
   * Targets: 12<sup>**</sup> binary targets  
@@ -142,12 +140,10 @@ One of the major difficulties of this competition lies in the number of zeros in
 The get to the final prediction, the targets of the two models are multiplied as follows: 
  
 <b> Final prediction = (1 - probability being zero) * continuous prediction </b>
-  
 <sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
-
 <sub> (**) depends on the prediction horizon </sub>
 
-#### Loss
+
 The cost is defined as follows:
 
 <b>  Total cost = mse continuous model + 0.05 x cross entropy zero model + 1e-3 x L2 variable norm </b> 
