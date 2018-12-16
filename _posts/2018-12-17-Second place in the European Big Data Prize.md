@@ -18,7 +18,6 @@ This blog post will cover all sections to go from the raw data to the final subm
    * *[Pre-Processing](#preProcessing)*
    * *[Feature engineering](#featEng)*
    * *[Model Architecture](#modelArchitecture)*
-   * *[Conclusion](#conclusion)*
 * *[Closing Remarks](#closingRemarks)*
 
 ## <a name="introduction"><a> Introduction
