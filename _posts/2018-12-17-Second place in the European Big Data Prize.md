@@ -127,10 +127,10 @@ To summarize, the considered predictors used in the final model are:
 * The current value and a binary value represent if it is a missing value or not
 * Periodical features of the part of the day (sin/cos projection)
 * Periodical features of the part of the week (sin/cos projection)
-* 33 Lagged values [1, 2, 3, 4, 5, 7, 10, 14, 20, 28, 36, 48, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 270, 280, 283, 285, 287, 288, 289, 291, 293, 296]: First and last lag are absolute scaled values[0, 1], others are relative changes of the scaled lagged values. There is a concentration of lag values at 1 day back as many series showed daily periodic trends (24\* 12 = 288\*5 minutes).
-* 33 Lagged missing values [1, 2, 3, 4, 5, 7, 10, 14, 20, 28, 36, 48, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 270, 280, 283, 285, 287, 288, 289, 291, 293, 296]: True/False/missing values
-* Last not missing value: relative change of the lagged values/missing value
-* Number of consecutive zeros: scaled [0,1]:
+* 33 Lagged values [1, 2, 3, 4, 5, 7, 10, 14, 20, 28, 36, 48, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 270, 280, 283, 285, 287, 288, 289, 291, 293, 296]: The first and last lag are scaled values [0, 1], others are relative changes of the scaled lagged values. There is a concentration of lag values at 1 day back as many series showed daily periodic trends (24\*12 = 288\*5 minutes).
+* 33 Lagged binary values representing if they are valid or not [1, 2, 3, 4, 5, 7, 10, 14, 20, 28, 36, 48, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 270, 280, 283, 285, 287, 288, 289, 291, 293, 296]
+* Last non missing value
+* Number of consecutive zeros: scaled [0, 1]:
    * 0: no zeros
    * Number of consecutive zeros/300 for 0 < Number of consecutive zeros < 300
    * 1 otherwise
