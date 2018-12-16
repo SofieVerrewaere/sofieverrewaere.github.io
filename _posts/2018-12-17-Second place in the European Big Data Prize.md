@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "European Commission Horizon 2020 prize on Big data Technologies"
-subtitle:   "Second place and €400K award!"
+subtitle:   "Second place and €400.000 award!"
 date:       2018-12-17 00:00:00
 author:     "Sofie Verrewaere"
 header-img: "img/EC/front.jpg"
@@ -9,7 +9,7 @@ comments: true
 ---
 
 ## Overview
-<a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished on a shared second place in the Big Data Technologies H2020 Prize!</b></a>
+<a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished joint second in the Big Data Technologies H2020 Prize!</b></a>
 
 This blog post will cover all sections to go from the raw data to the final submission. Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
 
@@ -29,7 +29,7 @@ The context of the Big Data Technologies Horizon Prize can be found on the <a hr
 
 Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
 
-Access to information in a timely way could have a positive impact on the way we consume energy, the way we organise our transport systems and even the way we run our health and other public services. Predicting consumption patterns must be accurate, and need to be delivered in real-time which will allow for effective action such as the use of energy resources in an optimal fashion. Faster, more accurate and resource-efficient prediction methods will result in more efficient management of sectors of the economy. Indeed today, these predictions are not always accurate and lead to the wasteful consumption of energy resources.
+Access to information in a timely way could have a positive impact on the way we consume energy, the way we organize our transport systems and even the way we run our health and other public services. Predicting consumption patterns must be accurate, and need to be delivered in real-time which will allow for effective action such as the use of energy resources in an optimal fashion. Faster, more accurate and resource-efficient prediction methods will result in more efficient management of sectors of the economy. Indeed today, these predictions are not always accurate and lead to the wasteful consumption of energy resources.
 
 The European Commission has launched the Big Data Technologies Horizon Prize to address this issue. The goal is to develop a new spatiotemporal forecasting method which are able to beat ones currently available.
 
@@ -42,14 +42,14 @@ The solutions are ranked based on the accuracy of the predictions, expressed as 
 
 The challenge requires the submission of code that can handle any type of panel data. Panel data consists of multi-dimensional data involving measurements over time. The time series are split up in time in a <b>train</b> and an <b>adapt</b> phase. The adapt phase simulates new incoming data. These data sets contain electrical flow time series with an interval of 5 minutes. In this challenge the aim is to forecast the flow of the next 60 min (1 hour), resulting in a forecast horizon of 12 steps. 
 
-Auxilary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxilary data would be available at the prediction time. No information on the spatial component was given, therefore no spatial component could be taken into account.
+Auxiliary data sets were provided, but I decided not to use these in the final submission as no strong guarantees were given that the auxiliary data would be available at the prediction time. No information on the spatial component was given, therefore no spatial component could be taken into account.
 
 The EC provided the contest platform on which the working software submissions are run against the <b>test data</b>. The testing data used at the contest platform was not accessible to the participants. The contest platform measures the performance (accuracy, speed, with limited resources to the AWS instance) of each working software submission and was used for testing, and to score and pre-rank the participants' working software. Yet another data set, verification data (data from the same process, but at a different time period, also consisting of panel data) was used for the verification runs and final ranking of the pre-selected applications by the jury.
 
 Prior to the opening of the contest platform, a starting kit was provided. This is a simulator of the contest platform that allows a participant to get familiar with the contest running environment and allows for the testing of the working software against sample datasets, representative to the actual test
 dataset. Specifically, the starting kit consists of 1916 time series with a train period of just over one year and an adapt period of approximately three months.
 
-One of the difficulties of this challenge is the unkown test distribution, which makes it very difficult to improve the model. As little is known of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
+One of the difficulties of this challenge is the unknown test distribution, which makes it very difficult to improve the model. As little is known of the unseen test data conservative parameter settings are used in the final submission. Lot's of inductive biases are used to ease the heavy lifting of the required model. These inductive biases are stressed throughout the Model Approach.
 
 ## <a name="modelApproach"><a> Model Approach
 
@@ -58,7 +58,7 @@ This section aims to summarize on a high level the modeling strategy of the comp
 ### <a name="preProcessing"><a> Pre-processing
 
 The most important steps of the data preprocessing approach are discussed below. 
-The motiviation to perform the pre-processing as described below is the way it allows to disentagle the major factors of variations (long zero periods and true variation) with a single neural net.
+The motivation to perform the pre-processing as described below is the way it allows to disentangle the major factors of variations (long zero periods and true variation) with a single neural net.
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important: <b>Short outlier bursts</b>, <b>Interpolated values</b> and <b>Zero values<b/>. 
 
 
@@ -68,7 +68,7 @@ Short burst outliers are removed from the training data and are ignored complete
 
 
 #### Handling interpolated values
-The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
+The interpolated values are an artifact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
 {% include image.html url="/img/EC/remove_interpolations.jpg" description="<small>Removing Interpolations</small>" %}
 
 
@@ -113,7 +113,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EC.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in the Adapt phase</small>" %}
 
-The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. The pre-training could have been done partially. The best candidated for the pre-training would be the first layers of the three considered MLP's. This first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
+The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. The pre-training could have been done partially. The best candidates for the pre-training would be the first layers of the three considered MLP's. This first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
 All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the <b>model</b> (and scaling parameters in Scenario 3) <b>gets updated, every fixed number of steps</b> (150 steps).
 {% include image.html url="/img/EC/model_update.jpg" description="<small>Data Flow</small>" %}
 
@@ -145,7 +145,7 @@ The deep learning model consists of three different MLP’s and one shared optim
 This MLP translates one-hot encoding predictors to a fixed length numeric embedding, which is used as additional input on top of the features. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
 * <b>Zero model MLP</b>: Predicts the probability of the values being zero (0/1).
 * <b>Continuous model MLP</b>: Predicts the continuous targets (the change). The last layer weights of the change model are initialized near zero. Close to persistence as starting point instead of random change predictions.
-* <b>Optimizer</b>: One shared adam optimizer is used for all models.
+* <b>Optimizer</b>: One shared Adam optimizer is used for all models.
 
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
 * A zero-model, predicting the probability<sup>*</sup> of the next value being a zero or not (when the current value is not missing) 
@@ -191,7 +191,7 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of privileg
 
 
 <b>Increase accuracy</b>: 
-* No auxilary sources were checked, incorporating auxilary data could further improve the model accuracy.
+* No auxiliary sources were checked, incorporating auxiliary data could further improve the model accuracy.
 * Get more information related to the test data. To give an example, what is the idea behind the interpolations? Are the interpolations also present in the test data?
 * The model could be made more global:
     * pushing it to the extreme - all time series could be predicted at once
