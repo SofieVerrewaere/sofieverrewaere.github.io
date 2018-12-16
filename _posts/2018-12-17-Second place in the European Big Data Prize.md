@@ -11,7 +11,8 @@ comments: true
 ## Overview
 <a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished joint second in the Big Data Technologies H2020 Prize!</b></a>
 
-This blog post will cover all sections to go from the raw data to the final submission. Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
+The goal of this blog post is to explain my approach to a very challenging problem. I will cover the high level approach in design decissions that enabled me to be succesful. 
+Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
 
 * *[Introduction](#introduction)*
 * *[Model Approach](#modelApproach)*
@@ -22,7 +23,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 
 ## <a name="introduction"><a> Introduction
 
-First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for their remarkable achievement!
+First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and congratulate the other winners, José Vilar and Yann-Aël Le Borgne for their remarkable achievement!
 
 ### Why this prize?
 The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata" target="_blank"><b>competition page</b></a>.
