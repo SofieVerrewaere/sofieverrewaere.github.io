@@ -8,8 +8,6 @@ header-img: "img/EC/front.jpg"
 comments: true
 ---
 
-
-
 ## Overview
 <a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished on a shared second place in the Big Data Technologies H2020 Prize!</b></a>
 
