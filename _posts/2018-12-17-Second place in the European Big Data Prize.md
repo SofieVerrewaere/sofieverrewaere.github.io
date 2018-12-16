@@ -94,7 +94,7 @@ Series that are zero/missing for most of the individual series will be treated d
 
 #### Input Deep Learning Model
 
-In this section the inputs of the neural network are described. In this section the missing values refer to values that belong to the regular values that are neither interpolated or outliers.
+In this section the inputs of the neural network are described. The term missing values refers to values that belong to the regular values that are neither interpolated or outliers.
 
 Not all the time series are used to feed the deep learning model. The time series are subdivided in valid and invalid data, based on the number of missing values. Series consisting of more than 90% of missing values in the train phase are considered invalid. However, the status (valid/invalid) can change in the adapt phase. Three possible scenarios are considered for each series independently at each adapt step (displayed as 1, 2 and 3 in following figures). 
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
@@ -102,14 +102,16 @@ Not all the time series are used to feed the deep learning model. The time serie
 * <b>Scenario 1</b>: Scenario 1 applies to series which are valid at both times (train and adapt phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined in the training phase and are stored between prediction steps. In the adapt phase the scaling parameters are reloaded and used to scale the adapt time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
+
 * <b>Scenario 2</b>: Scenario 2 applies to series which are valid in the training phase, but act different in the adapt phase (e.g. the ranges (min - max) change). The scaling determined in the training phase is no longer valid. If the scaled series exceed 1.2 or drop below -0.2 the series are considered temporary invalid. During temporary invalidness predictions are persistence. Persistence predictions are extrapolations of the last non outlier or interpolated value. If the last value is a 0 the persistence prediction is a zero as well.
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
+
 
 * <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become active in the adapt phase. Scaling parameters are determined periodically in the adapt phase after 150 steps. 
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EC.
-{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in adapt phase.</small>" %}
+{% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in the Adapt phase</small>" %}
 
 The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. The pre-training could have been done partially. The best candidated for the pre-training would be the first layers of the three considered MLP's. This first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
 All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the <b>model</b> (and scaling parameters in Scenario 3) <b>gets updated, every fixed number of steps</b> (150 steps).
@@ -137,6 +139,7 @@ To summarize, the considered predictors used in the final model are:
 The deep learning model consists of three different MLP’s and one shared optimizer. These three different MLP's are combined into on single model that is used for all time series to leverage the generalization capabilities of the neural networks to handl the complex modeling problem.
 
 {% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Architecture </small>" %}
+
 
 * <b>Embedding MLP</b>: Aims to extract individual time series specific features, enabling the model to specialize to varying time series patterns. Without this component, the overall model would not be able to take a horizon into account that exceeds the maximum feature lag.
 This MLP translates one-hot encoding predictors to a fixed length numeric embedding, which is used as additional input on top of the features. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient.
@@ -202,7 +205,7 @@ Forecasting has applications in a wide range of fields where estimates of future
 Example of other fields of applications are supply chain management, economic forecasting, earthquake prediction, egain forecasting, sales forecasting, weather forecasting, flood forecasting, meteorology and many others ... .
 
 ### What would you recommend to young data scientist or students who want to be succesful?
-I would suggest to start with a study of various data science topics. <a href="https://www.coursera.org/learn/machine-learning" target="_blank"><b>Andrew Ng’s course </b></a> is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. <a href="www.kaggle.com" target="_blank"><b>Kaggle </b></a> is of course an excellent platform to do so.
+I would suggest to start with a study of various data science topics. <a href="https://www.coursera.org/learn/machine-learning" target="_blank">Andrew Ng’s course</a> is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. <a href="www.kaggle.com" target="_blank">Kaggle</a> is of course an excellent platform to do so.
 
 I look forward to your comments and suggestions.
 
