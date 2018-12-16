@@ -206,7 +206,7 @@ Forecasting has applications in a wide range of fields where estimates of future
 Example of other fields of applications are the supply chain management, economic forecasting, earthquake prediction, sales forecasting, weather forecasting, flood forecasting, meteorology and many others ... not to mention stock prices :).
 
 ### What would you recommend to young data scientist or students who want to be succesful?
-I would suggest to start with a study of various data science topics. <a href="https://www.coursera.org/learn/machine-learning" target="_blank">Andrew Ng’s course</a> is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. <a href="www.kaggle.com" target="_blank">Kaggle</a> is of course an excellent platform to do so.
+I would suggest to start with a study of various data science topics. <a href="https://www.coursera.org/learn/machine-learning" target="_blank">Andrew Ng’s course</a> is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. <a href="https://www.kaggle.com/" target="_blank">Kaggle</a> is of course an excellent platform to do so.
 
 I look forward to your comments and suggestions.
 
