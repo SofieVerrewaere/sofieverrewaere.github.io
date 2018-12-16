@@ -163,10 +163,10 @@ To get to the final prediction, the targets of the two models are multiplied as 
 
 <p style="text-align:center;"><b> Final prediction = (1 - probability being zero) * continuous prediction </b></p> 
 
-The cost is defined as follows:
+The training objective for the optimizer is defined as follows:
 
 <p style="text-align:center;"><b> Total cost = mse continuous model + 0.05 * cross entropy zero model + 1e-3
-* L2 variable norm </b> </p> 
+* L2 variable norm of all MLP weights </b> </p> 
 
 ## <a name="closingRemarks"><a> Closing Remarks
 
