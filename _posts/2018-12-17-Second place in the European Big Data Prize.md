@@ -173,7 +173,7 @@ The training objective for the optimizer is defined as follows:
 ### What can be transferred (reused) to other similar challenges?
 The <b>usage of neural networks (NN)</b> can be transferred to other challenges. Neural networks are the current state of the art when the problem involves a large amount of high-frequency non-tabular data, which is obviously the case here. Furthermore, NN allow maximum flexibility in defining the solution to very specific problems.
 
-The <b>usage of inductive biases</b>, which corresponds to the usage of privileged information that eases the heavy lifting required by the model. These inductive biases are stressed throughout the blog post, but hereby a little overview:
+The <b>usage of inductive biases</b>, which corresponds to the usage of privileged information that eases the heavy lifting required by the model. These inductive biases are stressed throughout the blog post, and are summarized below:
 *	Visual inspection of the data cleaning is crucial for the success of the approach.
 * The lags are concentrated at a lag of one day
 *	Rescale time series so one shared model can be used
