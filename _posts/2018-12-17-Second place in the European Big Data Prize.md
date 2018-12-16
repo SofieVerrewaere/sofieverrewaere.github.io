@@ -23,7 +23,7 @@ Here's an overview of the different sections. If you want to skip ahead, just cl
 
 ## <a name="introduction"><a> Introduction
 
-First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and congratulate the other winners, José Vilar and Yann-Aël Le Borgne for their remarkable achievement!
+First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and congratulate the other winners, José Vilar (1ste Prize Winner!) and Yann-Aël Le Borgne for their remarkable achievement!
 
 ### Why this prize?
 The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata" target="_blank"><b>competition page</b></a>.
