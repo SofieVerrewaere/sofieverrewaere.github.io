@@ -146,7 +146,7 @@ The deep learning model consists of three different MLP’s and one shared optim
 * <b>Embedding MLP</b>: This part of the architecture aims to extract individual time series specific features, enabling the model to specialize to varying time series patterns. Without this component, the overall model would not be able to take a horizon into account that exceeds the maximum feature lag.
 This MLP translates one-hot encoding predictors to a fixed length numeric embedding, which is used as additional input on top of the features. The weights of the embedding can only be changed by the backpropagation of the continuous model. Influence of the zero model on the embedding is prevented by introducing a stop gradient in Tensorflow.
 * <b>Zero model MLP</b>: Model the probability of the values being zero (0/1).
-* <b>Continuous model MLP</b>: Model the continuous targets (the change). The last layer weights of the change model are initialized near zero. Close to persistence as starting point instead of random change predictions.
+* <b>Continuous model MLP</b>: Model the continuous targets (the change). The last layer weights of the change model are initialized near zero. This results in an initialization which the predictions are close to the persistence model as starting point instead of random change predictions.
 * <b>Optimizer</b>: One shared Adam optimizer is used for all models.
 
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
