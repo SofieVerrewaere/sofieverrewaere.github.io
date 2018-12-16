@@ -150,10 +150,10 @@ This MLP translates one-hot encoding predictors to a fixed length numeric embedd
 * <b>Optimizer</b>: One shared Adam optimizer is used for all models.
 
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
-* A zero-model, predicting the probability<sup>*</sup> of the next value being a zero or not (when the current value is not missing) 
-  * <b> 12<sup>**</sup> binary targets  </b>
-* A Continuous model, predicting the real value (when the current value is not zero or missing). This model predicts the change in normalized value from the last value. The predictions are converted using the training range in the post-processing phase.
-  * <b>12<sup>**</sup> continuous targets</b>
+* A zero-model, predicting the probability<sup>(*)</sup> of the next value being a zero or not (when the current value is not missing) 
+  * <b> 12<sup>(**)</sup> binary targets  </b>
+* A Continuous model, predicting the change value in scaled value (when the current value is not zero or missing). This model predicts the change in normalized value from the last value. The predictions are converted using the training range in the post-processing phase.
+  * <b>12<sup>(**)</sup> continuous targets</b>
   
 <sub> (*) probabilities were clipped in a post-processing phase: >0.99~1, <0.01~0 </sub>
 
