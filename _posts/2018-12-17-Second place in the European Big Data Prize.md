@@ -138,7 +138,7 @@ To summarize, the considered predictors used in the final model are:
 
 ### <a name="modelArchitecture"><a> Model Architecture
 
-The deep learning model consists of three different MLP’s and one shared optimizer. These three different MLP's are combined into on single model that is used for all time series to leverage the generalization capabilities of the neural networks to handl the complex modeling problem.
+The deep learning model consists of three different MLP’s and one shared optimizer. These three different MLP's are combined into one single model that is used for all time series to leverage the generalization capabilities of the neural networks to handle the complex modeling problem.
 
 {% include image.html url="/img/EC/model_architecture.jpg" description="<small> Model Architecture </small>" %}
 
