@@ -110,7 +110,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
 
-* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become valid in the adapt phase. Validness of time series is determined periodically in the adapt phase after 150 steps, however the range is only set ones in order to avoid the learned interpretations by the NN.
+* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become valid in the adapt phase. Validness of time series is determined periodically in the adapt phase each 150 steps, however the range is only set ones, otherwise this would invalidate earlier learned network outputs.
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EC.
