@@ -75,7 +75,7 @@ The interpolated values are an artefact of the preprocessing logic in the starti
 
 #### Handling zero values
 Zero values occur frequently in the training data (about one in three data points). Unlike the interpolated values, these represent real target values and hence require a special treatment. The huge amount of zero values is captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value, conditioned on it not being zero. This corresponds to the combined regression target in expectation.
-Modeling the two losses independently is thus tackling the same objective of optimizing the RMSE with a single model! The zero values are not incorporated in the regular values loss.
+Modeling the two losses independently is thus tackling the same objective of optimizing the RMSE with a single model! The zero values are not incorporated in the optimization of the regular values loss.
 {% include image.html url="/img/EC/split_into_2_series.jpg" description="<small>Split time series into a 2 series, one for zero values (0/1), one for regular values[0,1]</small>" %}
 
 
