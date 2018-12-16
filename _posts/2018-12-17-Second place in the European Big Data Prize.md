@@ -69,7 +69,7 @@ Short burst outliers are removed from the training data and are ignored complete
 
 
 #### Handling interpolated values
-The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points because of the evaluation metric (squared error in future window). Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
+The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points. Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
 {% include image.html url="/img/EC/remove_interpolations.jpg" description="<small>Removing Interpolations</small>" %}
 
 
