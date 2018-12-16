@@ -133,15 +133,16 @@ The deep learning model consist of 3 different mlp’s and one optimizer.
 
 One of the major difficulties of this competition lies in the number of zeros in the data. This was captured by dividing the prediction in two sub-predictions/models.
 * A zero-model, predicting the probability<sup>*</sup> of the next value being a zero or not (when the current value is not missing) 
-  * Targets: 12<sup>**</sup> binary targets  
+  * <b> 12<sup>**</sup> binary targets  </b>
 * A Continuous model, predicting the real value (when the current value is not zero or missing)
-  * Targets: 12<sup>**</sup> continuous targets
+  * <b>12<sup>**</sup> continuous targets</b>
   
 <p style="text-align:center;">Centered paragraph.</p>
 
 The get to the final prediction, the targets of the two models are multiplied as follows: 
  
 <b> Final prediction = (1 - probability being zero) * continuous prediction </b>
+
 <sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
 <sub> (**) depends on the prediction horizon </sub>
 
