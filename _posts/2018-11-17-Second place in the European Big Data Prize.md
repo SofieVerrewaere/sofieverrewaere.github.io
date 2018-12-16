@@ -170,7 +170,7 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of a privil
 
 ### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
 I would ensure that the multiprocessing is done on GPU's in the training phase. 
-I would do a proper hyperparameter tuning in the cloud - now conservative settings ar ues as little was known about the unseen data. 
+I would do a proper hyperparameter tuning in the cloud - now conservative settings are used as little was known about the unseen data. 
 
 ### How would you further improve the model to make it faster, more accurate?
 <b>Increase speed</b>: 
