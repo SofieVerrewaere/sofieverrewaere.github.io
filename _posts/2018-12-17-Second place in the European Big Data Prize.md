@@ -102,7 +102,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 {% include image.html url="/img/EC/splitdata.jpg" description="<small>Split time series in valid and invalid data</small>" %}
 
 
-* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at both times (train and adapt phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined exactly ones in the training phase and are stored between prediction steps. The  scaling parameters are reloaded in the adapt phase and are used to scale the adapt time series.
+* <b>Scenario 1</b>: Scenario 1 applies to series which are valid at both times (train and adapt phase). The number of missing values are limited and the regime (range in particular) is consistent throughout time. The time series are subjected to two types of manipulations, scaling and differentiating. The scaling parameters (max, min,...) are determined exactly once in the training phase and are stored between prediction steps. The  scaling parameters are reloaded in the adapt phase and are used to scale the adapt time series.
 {% include image.html url="/img/EC/scenario1.jpg" description="<small>Scenario 1</small>" %}
 
 
@@ -110,7 +110,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 {% include image.html url="/img/EC/scenario2.jpg" description="<small>Scenario 2</small>" %}
 
 
-* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become valid in the adapt phase. Validness of time series is determined periodically in the adapt phase each 150 steps, however the range is only set ones, otherwise this would invalidate earlier learned network outputs.
+* <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become valid in the adapt phase. Validness of time series is determined periodically in the adapt phase each 150 steps, however the range is only set once, otherwise this would invalidate earlier learned network outputs.
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
 In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EC.
