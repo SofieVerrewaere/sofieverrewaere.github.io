@@ -137,6 +137,8 @@ One of the major difficulties of this competition lies in the number of zeros in
 * A Continuous model, predicting the real value (when the current value is not zero or missing)
   * Targets: 12<sup>**</sup> continuous targets
   
+<p style="text-align:center;">Centered paragraph.</p>
+
 The get to the final prediction, the targets of the two models are multiplied as follows: 
  
 <b> Final prediction = (1 - probability being zero) * continuous prediction </b>
