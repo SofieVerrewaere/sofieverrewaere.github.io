@@ -136,15 +136,14 @@ One of the major difficulties of this competition lies in the number of zeros in
   * <b> 12<sup>**</sup> binary targets  </b>
 * A Continuous model, predicting the real value (when the current value is not zero or missing)
   * <b>12<sup>**</sup> continuous targets</b>
+  
+<sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
+
+<sub> (**) depends on the prediction horizon </sub>
 
 The get to the final prediction, the targets of the two models are multiplied as follows: 
 
 <p style="text-align:center;"><b> Final prediction = (1 - probability being zero) * continuous prediction </b></p> 
-
-
-<sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
-<sub> (**) depends on the prediction horizon </sub>
-
 
 The cost is defined as follows:
 
