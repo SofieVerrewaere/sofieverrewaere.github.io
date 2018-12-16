@@ -159,10 +159,6 @@ The cost is defined as follows:
 <p style="text-align:center;"><b> Total cost = mse continuous model + 0.05 * cross entropy zero model + 1e-3
 * L2 variable norm </b> </p> 
 
-### <a name="conclusion"><a> Conclusion
-
-TBC...
-
 ## <a name="closingRemarks"><a> Closing Remarks
 
 ### What can be transferred (reused) to other similar challenges?
@@ -170,16 +166,13 @@ The <b>usage of neural networks (NN)</b> can be transferred to other challenges.
 
 The <b>usage of inductive biases</b>, which corresponds to the usage of privileged information that eases the heavy lifting required by the model. These inductive biases are stressed throughout the blog post, but hereby a little overview:
 *	Visual inspection of the data cleaning is crucial for the success of the approach.
-*	Rescale time series so one shared model can be used.
+* The lags are concentrated at a lag of one day
+*	Rescale time series so one shared model can be used
 *	Predict differences (change) instead of absolute values
 *	Combination of zero and change model
 *	Make use of a global (zero and change model) and local component (embedding) in model
 *	Usage of persistence for time series that enter an unseen range in the adapt phase.
 *	Initialize the last layer weights of the change model near zero. This corresponds with predictions close to persistence as the starting point instead of random change predictions.
-
-### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
-I would ensure that the multiprocessing is done on GPU's in the training phase. 
-I would do a proper hyperparameter tuning in the cloud - now conservative settings are used as little was known about the unseen data. 
 
 ### How would you further improve the model to make it faster, more accurate?
 <b>Increase speed</b>: 
@@ -187,6 +180,8 @@ I would do a proper hyperparameter tuning in the cloud - now conservative settin
 * I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
 * I would optimize the compute time of the feature <i>Time since last non NA</i>, by programming a custom made library using C(++).
 * Save time in the pre-processing by excluding time series with very little variation. 
+* I would ensure that the multiprocessing is done on GPU's in the training phase. 
+
 
 <b>Increase accuracy</b>: 
 * No auxilary sources were checked, incorporating auxilary data could further improve the model accuracy.
@@ -196,6 +191,7 @@ I would do a proper hyperparameter tuning in the cloud - now conservative settin
     * or a possible middle ground - assign time series to k-clusters and perform batch predictions - this           would result in a group and a global encoding.
 * Integrating a feedback loop of earlier model predictions could further improve the model accuracy. The idea is to check how good the predictions were and to switch between models based on the prediction errors (e.g. if the predictions are worse then the persistence, stick with the persistence).
 * Now the model is updated at fixed predictions steps. This could be changed to adaptive steps depending on the feedback loop of the prediction errors. Or when new time series enter the measurements, make adaptations to the model. 
+* I would do a proper hyperparameter tuning in the cloud. In the final submission conservative settings are used as little is known about the unseen data. 
 
 ### In which other fields would you see applications for similar prediction challenge and solutions?
 Forecasting has applications in a wide range of fields where estimates of future conditions are useful. 
