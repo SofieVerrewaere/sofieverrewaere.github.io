@@ -54,7 +54,7 @@ One of the difficulties of this challenge is the unknown test distribution, whic
 
 ## <a name="modelApproach"><a> Model Approach
 
-This section aims to summarize on a high level the modeling strategy of the competition approach. All logic is implemented in <b>Python</b>, which is GPL compatible. The Tensorflow package is used to train and load deep learning models. <b>Tensorflow</b> is used for deep learning in Python. The Python package <b>Pandas</b> for tabular data handling and the Python package <b>Numpy</b> for numeric computations. The Python package <b>Multiprocessing</b> is used to parallelize the computations.
+This section aims to summarize the modeling strategy of the competition approach on a high level. All logic is implemented in <b>Python</b>, which is GPL compatible. The Tensorflow package is used to train and load deep learning models. <b>Tensorflow</b> is used for deep learning in Python. The Python package <b>Pandas</b> for tabular data handling and the Python package <b>Numpy</b> for numeric computations. The Python package <b>Multiprocessing</b> is used to parallelize the computations.
 
 ### <a name="preProcessing"><a> Pre-processing
 
