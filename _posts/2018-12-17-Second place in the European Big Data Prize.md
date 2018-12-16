@@ -203,7 +203,7 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of privileg
 
 ### In which other fields would you see applications for similar prediction challenge and solutions?
 Forecasting has applications in a wide range of fields where estimates of future conditions are useful. 
-Example of other fields of applications are supply chain management, economic forecasting, earthquake prediction, egain forecasting, sales forecasting, weather forecasting, flood forecasting, meteorology and many others ... .
+Example of other fields of applications are the supply chain management, economic forecasting, earthquake prediction, sales forecasting, weather forecasting, flood forecasting, meteorology and many others ... not to mention stock prices :).
 
 ### What would you recommend to young data scientist or students who want to be succesful?
 I would suggest to start with a study of various data science topics. <a href="https://www.coursera.org/learn/machine-learning" target="_blank">Andrew Ng’s course</a> is an excellent place to start. Getting your hands dirty with appropriate feedback is the next step if you want to get better. <a href="www.kaggle.com" target="_blank">Kaggle</a> is of course an excellent platform to do so.
