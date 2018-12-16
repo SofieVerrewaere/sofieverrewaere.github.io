@@ -116,8 +116,8 @@ Not all the time series are used to feed the deep learning model. The time serie
 In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account with fixed lags perform the prediction. The number of steps and the forecast horizon are predetermined by the EC, but are subject to change.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in the Adapt phase</small>" %}
 
-The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. The pre-training could have been done partially. The best candidates for the pre-training would be the first layers of the three considered MLP's. This first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
-All data is used in the training phase, with a limited train window, to train the model and the scaling parameters are determined (cfr. Scenario 1). In the adapt phase, the <b>model</b> (and scaling parameters in Scenario 3) <b>gets updated, every fixed number of steps</b> (150 steps).
+The deep learning model can be (but is not in the final submission) pre-trained. The pre-training could also have been done partially. The best candidates for the pre-training would be the first layers of the three considered MLP's. These first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
+In the adapt phase, the <b>model gets updated, every fixed number of adapt steps</b> (150 steps).
 {% include image.html url="/img/EC/model_update.jpg" description="<small>Data Flow</small>" %}
 
 ### <a name="featEng"><a> Feature engineering
