@@ -173,13 +173,13 @@ I would ensure that the multiprocessing is done on GPU's in the training phase.
 I would do a proper hyperparameter tuning in the cloud - now conservative settings ar ues as little was known about the unseen data. 
 
 ### How would you further improve the model to make it faster, more accurate?
-<b>To make it faster</b>: 
+<b>Increase speed</b>: 
 *	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done one by one.
 * I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
 * I would optimize the compute time of the feature <i>Time since last non NA</i>, by programming a custom made library using C(++)>
 * Save time in the pre-processing by excluding time series with very little variation. 
 
-<b>To make it more accurate</b>: 
+<b>Increase accuracy</b>: 
 * No auxilary sources were checked, incorporating auxilary data could further improve the model accuracy.
 * Get more information related to the test data. To give an example, what is the idea behind the interpolations? Are the interpolations also present in the test data?
 * The model could be made more global:
