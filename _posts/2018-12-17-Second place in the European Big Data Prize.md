@@ -85,7 +85,7 @@ It was unclear if actual missing values could be present in the raw data. Should
 
 
 #### Scale, transform and augment
-Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if the inputs are normalized. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point is a missing value.
+Neural networks work better when the inputs are normalized. Techniques like batch-norm handle inputs/internal network covariates that have constant variance but it is likely to be better if the inputs are normalized. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point is a missing value.
 
 The advantage of rescaling the time series is that one shared model can be used to predict all the time series. 
 
