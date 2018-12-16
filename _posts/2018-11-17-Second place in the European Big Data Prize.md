@@ -136,12 +136,11 @@ One of the major difficulties of this competition lies in the number of zeros in
   * <b> 12<sup>**</sup> binary targets  </b>
 * A Continuous model, predicting the real value (when the current value is not zero or missing)
   * <b>12<sup>**</sup> continuous targets</b>
-  
-<p style="text-align:center;">Centered paragraph.</p>
 
 The get to the final prediction, the targets of the two models are multiplied as follows: 
- 
-<b> Final prediction = (1 - probability being zero) * continuous prediction </b>
+
+<p style="text-align:center;"><b> Final prediction = (1 - probability being zero) * continuous prediction </b></p> 
+
 
 <sub> (*) probabilities were clipped: >0.99~1, <0.01~0 </sub>
 <sub> (**) depends on the prediction horizon </sub>
@@ -149,7 +148,7 @@ The get to the final prediction, the targets of the two models are multiplied as
 
 The cost is defined as follows:
 
-<b>  Total cost = mse continuous model + 0.05 x cross entropy zero model + 1e-3 x L2 variable norm </b> 
+<p style="text-align:center;"><b><b>  Total cost = mse continuous model + 0.05 x cross entropy zero model + 1e-3 x L2 variable norm </b> </p> 
 
 ### <a name="conclusion"><a> Conclusion
 
@@ -169,7 +168,6 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of a privil
 *	Initialize last layer weights of change model near zero. Close to persistence as starting point instead of random change predictions.
 
 #### What would you do differently if you had unlimited (or a lot more) computing resourcesavailable for the prediction task?
-
 I would ensure that the multiprocessing is done on GPU's in the training phase. 
 I would do a proper hyperparameter tuning in the cloud - now conservative settings ar ues as little was known about the unseen data. 
 
