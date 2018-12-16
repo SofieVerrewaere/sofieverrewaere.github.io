@@ -63,28 +63,28 @@ The motivation to perform the pre-processing as described below is to allow dise
 The raw data contains all sorts of unusual time series patterns of which the following three are the most important: <b>Short outlier bursts</b>, <b>Interpolated values</b> and <b>Zero values<b/>. All pre-processing steps use relative magnitude hyperparameters resulting in a scale invariant procedure.
 
 
-#### Handling outliers
+#### Outliers
 Short burst outliers are removed from the training data and are ignored completely since it is likely to hurt the modeling capability. The better fit is expected to outweigh benefits from learning about outlier patterns.
 {% include image.html url="/img/EC/remove_outliers.jpg" description="<small>Removing Outliers</small>" %}
 
 
-#### Handling interpolated values
+#### Interpolated values
 The interpolated values are an artefact of the preprocessing logic in the starting kit. Therefore I decided to NOT include interpolated data points. Including interpolated values would encourage the model to learn to continue the interpolation to the next real data point but this next real data point will obviously not be available when considering future data!
 {% include image.html url="/img/EC/remove_interpolations.jpg" description="<small>Removing Interpolations</small>" %}
 
 
-#### Handling zero values
+#### Zero values
 Zero values occur frequently in the training data (about one in three data points). Unlike the interpolated values, these represent real target values and hence require a special treatment. The huge amount of zero values is captured by defining two types of targets, targets for regular (non-zero) values and the probability of zero values. The combined forecast is the probability of a non-zero value times the forecasted non-zero value, conditioned on it not being zero. This corresponds to the combined regression target in expectation.
 Modeling the two losses independently is thus tackling the same objective of optimizing the RMSE with a single model! 
 When the target is zero, the regular values target is unknown and is not incorporated in the optimization of the regular values loss.
 {% include image.html url="/img/EC/split_into_2_series.jpg" description="<small>Split time series into two series, one for zero values (0/1), one for regular values[0,1]</small>" %}
 
 
-#### Handling missing values
-Missing values are interpolated before doing the preprocessing, this results in those data points being ignored in the model fitting. It was unclear if actual missing values could be present in the raw data. 
+#### Missing values
+It was unclear if actual missing values could be present in the raw data. Should they occure, missing values are interpolated before the pre-processing. This results in those data points being ignored in the model fitting.
 
 
-#### Scaling, transform and augment data
+#### Scale, transform and augment
 Neural networks work better when the inputs are in a fixed range. Techniques like batch-norm handle inputs/internal network covariates that have varying ranges but it is likely to be better if the inputs are normalized. The input series were normalized to [0, 1] after exclusion of the outliers. I also augmented this normalized data by containing lags of the input, changes in input time steps and by adding a binary mask to indicate if the input data point is a missing value.
 
 The advantage of rescaling the time series is that one shared model can be used to predict all the time series. 
