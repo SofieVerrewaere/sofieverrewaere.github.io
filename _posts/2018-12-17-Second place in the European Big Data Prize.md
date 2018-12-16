@@ -113,7 +113,7 @@ Not all the time series are used to feed the deep learning model. The time serie
 * <b>Scenario 3</b>: Scenario 3 applies to series which are invalid in the training phase, but become valid in the adapt phase. Validness of time series is determined periodically in the adapt phase each 150 steps, however the range is only set once, otherwise this would invalidate earlier learned network outputs.
 {% include image.html url="/img/EC/scenario3.jpg" description="<small>Scenario 3</small>" %}
 
-In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account to perform the prediction. The number of steps and the forecast horizon are predetermined by the EC.
+In the training phase, all possible data was taken into account. In the adapt phase, a <b>moving window approach </b>is applied. Only a part of the historical data is taken into account with fixed lags perform the prediction. The number of steps and the forecast horizon are predetermined by the EC, but are subject to change.
 {% include image.html url="/img/EC/moving_window.jpg" description="<small>Moving window approach in the Adapt phase</small>" %}
 
 The deep learning model can be (but is not in the final submission) (pre-)trained and updated on specific moments in time. The pre-training could have been done partially. The best candidates for the pre-training would be the first layers of the three considered MLP's. This first layers are more likely to detect generic time series features and are most likely to transfer well to new data.
