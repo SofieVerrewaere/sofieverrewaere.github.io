@@ -188,18 +188,17 @@ The <b>usage of inductive biases</b>, which corresponds to the usage of privileg
 *	Pre-processing the timeseries in batch would significantly increase the prediction speed. At the moment the pre-processing is done for each time series independently.
 * I would avoid importing the packages for each prediction round, as this took up one of the three predictions seconds.
 * I would optimize the compute time of the feature <i>Time since last non NA</i>, by programming a custom made library using C(++).
-* Save time in the pre-processing by excluding time series with very little variation. 
-* I would ensure that the multiprocessing is done on GPU's in the training phase. 
-
+* Save time in the pre-processing by predicting time series with very little variation using the persistence rule.
+* I would ensure that the training of the NN is performed in parallel on all available GPU's.
 
 <b>Increase accuracy</b>: 
 * No auxiliary sources were checked, incorporating auxiliary data could further improve the model accuracy.
 * Get more information related to the test data. To give an example, what is the idea behind the interpolations? Are the interpolations also present in the test data?
-* The model could be made more global:
+* The model could be extended to be able to capture inter time series dependencies:
     * pushing it to the extreme - all time series could be predicted at once
-    * or a possible middle ground - assign time series to k-clusters and perform batch predictions - this           would result in a group and a global encoding.
-* Integrating a feedback loop of earlier model predictions could further improve the model accuracy. The idea is to check how good the predictions were and to switch between models based on the prediction errors (e.g. if the predictions are worse then the persistence, stick with the persistence).
-* Now the model is updated at fixed predictions steps. This could be changed to adaptive steps depending on the feedback loop of the prediction errors. Or when new time series enter the measurements, make adaptations to the model. 
+    * possible middle ground - assign time series to k-clusters and perform batch predictions - this could be modeled using a group and a global encoding.
+* Integrating a feedback loop of earlier model predictions could further improve the model accuracy. The idea would be to check how good the predictions were and to switch between models based on the prediction errors (e.g. if the predictions are worse then the persistence, stick with the persistence).
+* The model is currently updated at fixed predictions steps. This could be changed to adaptive steps depending on the feedback loop of the prediction errors. 
 * I would do a proper hyperparameter tuning in the cloud. In the final submission conservative settings are used as little is known about the unseen data. 
 
 ### In which other fields would you see applications for similar prediction challenge and solutions?
