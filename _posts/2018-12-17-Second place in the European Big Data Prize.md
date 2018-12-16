@@ -11,6 +11,7 @@ comments: true
 
 
 ## Overview
+<a href="https://ec.europa.eu/digital-single-market/en/news/big-data-prizes-awarded-most-accurate-electricity-grid-flow-predictions" target="_blank"><b>I finished on a shared second place in the Big Data Technologies H2020 Prize!</b></a>
 
 This blog post will cover all sections to go from the raw data to the final submission. Here's an overview of the different sections. If you want to skip ahead, just click the section title to go there.
 
@@ -27,7 +28,7 @@ This blog post will cover all sections to go from the raw data to the final subm
 First of all I would like to thank the European Commission (EC) for organizing the Big Data Technologies H2020 Prize. It has been an amazing experience! I would also like to thank the other participants and to congratulate the other winners, José Vilar and Yann-Aël Le Borgne for this remarkable achievement!
 
 ### Why this prize?
-The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata"><b>competition page</b></a>.
+The context of the Big Data Technologies Horizon Prize can be found on the <a href="http://ec.europa.eu/research/horizonprize/index.cfm?prize=bigdata" target="_blank"><b>competition page</b></a>.
 
 Many issues impacting society such as climate change, overcrowded and polluting transportation systems, wasteful energy consumption, would improve with our ability to examine historical records and predict the evolution of these different developments in our society and our economy.
 
@@ -35,7 +36,7 @@ Access to information in a timely way could have a positive impact on the way we
 
 The European Commission has launched the Big Data Technologies Horizon Prize to address this issue. The goal is to develop a new spatiotemporal forecasting method which are able to beat ones currently available.
 
-<a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf"><b>Read the detailed rules of the contest </b></a>
+<a href="http://ec.europa.eu/research/participants/data/ref/h2020/other/prizes/contest_rules/h2020-prizes-rules-big-data_en.pdf" target="_blank"><b>Read the detailed rules of the contest </b></a>
 
 ### Challenge?
 The challenge is to improve the performance of software for the forecasting of geospatio-temporal data (collections of time-stamped records that are linked to a geospatial location).  The prize rewards a solution which improves existing methods in terms of scalability, accuracy, speed and use of computational resources.
